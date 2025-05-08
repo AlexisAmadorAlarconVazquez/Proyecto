@@ -65,8 +65,7 @@
         android:id="@+id/registerLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="5dp"
         android:text="@string/texto_registrate"
         android:textColor="#A6FFFA"
         android:textStyle="bold"
@@ -77,14 +76,13 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/button_background"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
         android:text="@string/login_button"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
@@ -92,10 +90,11 @@
         android:id="@+id/registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="60dp"
         android:text="@string/register_prompt"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
