@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">ProyectoTitulacion</string>
-    <string name="logo_description">Logo</string>
-    <string name="username_hint">Usuario</string>
-    <string name="password_hint">Contraseña</string>
-    <string name="texto_registrate">Regístrate</string>
-    <string name="login_button">Ingresar</string>
-    <string name="register_prompt">No tienes una cuenta?</string>
 
+        <string name="registro_completo_mensaje">Completa tu registro para acceder a todas las funciones de la aplicación</string>
+        <string name="usuario_hint">Usuario</string>
+        <string name="nombre_completo_hint">Nombre Completo</string>
+        <string name="fecha_nacimiento_hint">Fecha de Nacimiento</string>
+        <string name="email_hint">E-Mail</string>
+        <string name="password_hint">Contraseña</string>
+        <string name="confirmar_password_hint">Confirmar Contraseña</string>
+        <string name="registrar_button">REGISTRAR</string>
+        <string name="iniciar_sesion_prompt">¿Tienes una cuenta? Inicia Sesión</string>
+
+    <string-array name="generos_array">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otro</item>
+    </string-array>
 </resources>
