@@ -14,7 +14,7 @@
 
 
         <TextView
-            android:text="@string/registro_completo_mensaje"
+            android:text="@string/text_complete_register_hint"
             android:textAlignment="center"
             android:textStyle="bold"
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:id="@+id/etUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/usuario_hint"
+            android:hint="@string/username_hint"
             android:drawableStart="@drawable/usuarioicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:padding="10dp"
@@ -37,7 +37,7 @@
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombre_completo_hint"
+            android:hint="@string/name_person_hint"
             android:drawableStart="@drawable/usuarioicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:padding="10dp"
@@ -49,7 +49,7 @@
             android:id="@+id/etFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fecha_nacimiento_hint"
+            android:hint="@string/date_hint"
             android:focusable="false"
             android:drawableStart="@drawable/calendaricon"
             android:background="@drawable/button_backgrond_lineas_white"
@@ -69,7 +69,7 @@
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_hint"
+            android:hint="@string/mail_hint"
             android:drawableStart="@drawable/emailicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:inputType="textEmailAddress"
@@ -93,7 +93,7 @@
             android:id="@+id/etConfirmarPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirmar_password_hint"
+            android:hint="@string/confirm_password_hint"
             android:drawableStart="@drawable/passwordicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:inputType="textPassword"
@@ -105,18 +105,27 @@
             android:id="@+id/btnRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/registrar_button"
+            android:text="@string/texto_registrate"
             android:backgroundTint="#0088ff"
             android:textColor="#ffffff"
             android:layout_marginTop="20dp"/>
 
         <!-- Inicia sesión -->
+
+        <TextView
+            android:id="@+id/tvTienesCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/account_hint"
+            android:textColor="#0077cc" />
+
         <TextView
             android:id="@+id/tvIniciarSesion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/iniciar_sesion_prompt"
-            android:textColor="#0077cc"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/login_hint"
+            android:textColor="#0077cc" />
     </LinearLayout>
 </ScrollView>
