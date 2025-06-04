@@ -2,7 +2,7 @@
     <string name="app_name">ProyectoTitulacion</string>
     <string name="logo_description">Logo</string>
     <string name="username_hint">Usuario ACTUALIZACION</string>
-    <string name="password_hint">Contraseña</string>
+    <string name="password_hint">Contraseñal</string>
     <string name="texto_registrate">Regístrate</string>
     <string name="login_button">Ingresar</string>
     <string name="register_prompt">No tienes una cuenta?</string>
