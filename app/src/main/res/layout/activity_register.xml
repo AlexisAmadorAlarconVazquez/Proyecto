@@ -29,7 +29,7 @@
             android:hint="@string/username_hint"
             android:drawableStart="@drawable/usuarioicon"
             android:background="@drawable/button_backgrond_lineas_white"
-            android:padding="10dp"
+            android:padding="11dp"
             android:inputType="text"/>
 
         <!-- Nombre Completo -->
