@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ProyectoTitulacion</string>
     <string name="logo_description">Logo</string>
-    <string name="username_hint">Usuario</string>
+    <string name="username_hint">Usuario ACTUALIZACION</string>
     <string name="password_hint">Contraseña</string>
     <string name="texto_registrate">Regístrate</string>
     <string name="login_button">Ingresar</string>
