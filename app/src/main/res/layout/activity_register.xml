@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/tvTitulo"
-            android:layout_width="349dp"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
             android:background="@drawable/redondoblanco_background"
             android:gravity="center"
