@@ -1,0 +1,20 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Estado presionado (te recomiendo un tono que contraste) -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#2E3C45"/> <!-- Color medio del degradado -->
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+    <!-- Estado normal (simulando el color más representativo del fondo) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#23443B"/> <!-- Color inferior del degradado -->
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+</selector>
+
