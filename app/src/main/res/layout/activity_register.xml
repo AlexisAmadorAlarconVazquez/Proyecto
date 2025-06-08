@@ -9,24 +9,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-        android:gravity="center_horizontal"
-        >
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
-            android:layout_constraintEnd_toEndOf="parent"
-            android:layout_constraintStart_toStartOf="parent"
-            android:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/redondoblanco_background"
             android:gravity="center"
             android:padding="12dp"
             android:text="Registro"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="22sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:text="@string/text_complete_register_hint"
@@ -35,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp" />
 
         <!-- Usuario -->
         <EditText
@@ -45,9 +40,10 @@
             android:hint="@string/username_hint"
             android:drawableStart="@drawable/usuarioicon"
             android:background="@drawable/button_backgrond_lineas_white"
-            android:padding="11dp"
+            android:padding="12dp"
+            android:minHeight="48dp"
             android:inputType="text"
-            />
+            android:autofillHints="username" />
 
         <!-- Nombre Completo -->
         <EditText
@@ -57,10 +53,11 @@
             android:hint="@string/name_person_hint"
             android:drawableStart="@drawable/usuarioicon"
             android:background="@drawable/button_backgrond_lineas_white"
-            android:padding="10dp"
+            android:padding="12dp"
+            android:minHeight="48dp"
             android:inputType="textPersonName"
-            android:layout_marginTop="10dp"
-            />
+            android:autofillHints="name"
+            android:layout_marginTop="10dp" />
 
         <!-- Fecha de Nacimiento -->
         <EditText
@@ -71,8 +68,10 @@
             android:focusable="false"
             android:drawableStart="@drawable/calendaricon"
             android:background="@drawable/button_backgrond_lineas_white"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"/>
+            android:padding="12dp"
+            android:minHeight="48dp"
+            android:autofillHints="birthday"
+            android:layout_marginTop="10dp" />
 
         <!-- Género -->
         <Spinner
@@ -80,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_backgrond_lineas_white"
-            android:layout_marginTop="10dp"/>
+            android:minHeight="48dp"
+            android:layout_marginTop="10dp" />
 
         <!-- Email -->
         <EditText
@@ -91,8 +91,10 @@
             android:drawableStart="@drawable/emailicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"/>
+            android:padding="12dp"
+            android:minHeight="48dp"
+            android:autofillHints="emailAddress"
+            android:layout_marginTop="10dp" />
 
         <!-- Contraseña -->
         <EditText
@@ -103,8 +105,10 @@
             android:drawableStart="@drawable/passwordicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:inputType="textPassword"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"/>
+            android:padding="12dp"
+            android:minHeight="48dp"
+            android:autofillHints="password"
+            android:layout_marginTop="10dp" />
 
         <!-- Confirmar Contraseña -->
         <EditText
@@ -115,9 +119,11 @@
             android:drawableStart="@drawable/passwordicon"
             android:background="@drawable/button_backgrond_lineas_white"
             android:inputType="textPassword"
-            android:textColor="#000000"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"/>
+            android:padding="12dp"
+            android:minHeight="48dp"
+            android:autofillHints="password"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp" />
 
         <!-- Botón -->
         <Button
@@ -125,19 +131,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/texto_registrate"
-            android:backgroundTint="#0088ff"
-            android:textColor="#ffffff"
-            android:layout_marginTop="20dp"/>
+            android:backgroundTint="@color/azul_boton"
+            android:textColor="@color/white"
+            android:minHeight="48dp"
+            android:layout_marginTop="20dp" />
 
         <!-- Inicia sesión -->
-
         <TextView
             android:id="@+id/tvTienesCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/account_hint"
-            android:textColor="#000" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvIniciarSesion"
@@ -145,6 +151,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/login_hint"
-            android:textColor="#000" />
+            android:textColor="@color/black" />
     </LinearLayout>
 </ScrollView>
