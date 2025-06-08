@@ -1,3 +1,5 @@
+package com.example.proyectotitulacion;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -32,11 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
         spGenero = findViewById(R.id.spGenero);
         btnRegistrar = findViewById(R.id.btnRegistrar);
 
-        // Configurar Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.generos_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGenero.setAdapter(adapter);
+        // Configurar Spinner posible cambio
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+          //      R.array.generos_array, android.R.layout.simple_spinner_item);
+       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       // spGenero.setAdapter(adapter);
 
         // Selección de fecha
         etFecha.setOnClickListener(v -> {

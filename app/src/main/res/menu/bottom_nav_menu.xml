@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_calendar"
+        android:icon="@drawable/calendario_base"
+        android:title="Citas" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/chat_bot"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/hogar_1"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/nav_categories"
+        android:icon="@drawable/categorias"
+        android:title="Categorías" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/usuario_de_perfil_1"
+        android:title="Perfil" />
+
+</menu>
