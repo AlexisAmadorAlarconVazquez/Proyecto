@@ -17,7 +17,7 @@
         android:text="Agendar cita"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:textSize="22sp"
+        android:textSize="23sp"
         android:gravity="center"
         android:padding="12dp"
         android:background="@drawable/redondoblanco_background"
