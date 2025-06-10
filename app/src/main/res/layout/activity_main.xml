@@ -14,7 +14,7 @@
         android:id="@+id/tvTitulo"
         android:layout_width="251dp"
         android:layout_height="wrap_content"
-        android:text="Agendar cita"
+        android:text="Agendar cta"
         android:textColor="#000000"
         android:textStyle="bold"
         android:textSize="23sp"
