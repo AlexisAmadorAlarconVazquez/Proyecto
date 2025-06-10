@@ -16,10 +16,6 @@
         android:icon="@drawable/hogar_1"
         android:title="Inicio" />
 
-    <item
-        android:id="@+id/nav_categories"
-        android:icon="@drawable/categorias"
-        android:title="Categorías" />
 
     <item
         android:id="@+id/nav_profile"
