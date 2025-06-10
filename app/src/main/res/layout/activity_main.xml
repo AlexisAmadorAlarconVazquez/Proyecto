@@ -12,7 +12,7 @@
     <!-- Título en cuadro blanco -->
     <TextView
         android:id="@+id/tvTitulo"
-        android:layout_width="250dp"
+        android:layout_width="251dp"
         android:layout_height="wrap_content"
         android:text="Agendar cita"
         android:textColor="#000000"
