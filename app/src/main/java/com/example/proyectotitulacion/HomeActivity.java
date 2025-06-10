@@ -79,12 +79,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
-            } else if (id == R.id.nav_categories) {
-                Intent intent = new Intent(this, CategoriasActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
-                return true;
             } else if (id == R.id.nav_profile) {
                 Intent intent = new Intent(this, PerfilActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
