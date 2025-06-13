@@ -1,101 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
+    android:padding="26dp"
+    android:background="@drawable/background_pantallasgenerales"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="72dp"
-        android:contentDescription="@string/logo_description"
-        android:src="@drawable/logoyidam"
+    <!-- Título en cuadro blanco -->
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Agendar cita"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@drawable/redondoblanco_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Fecha seleccionada -->
+    <TextView
+        android:id="@+id/tvFechaSeleccionada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Seleccione la fecha para agendar su cita"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:paddingTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón para seleccionar fecha -->
+    <Button
+        android:id="@+id/btnSeleccionarFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar fecha"
+        app:layout_constraintTop_toBottomOf="@id/tvFechaSeleccionada"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#24C6DC"
+        android:layout_marginTop="20dp" />
+
+    <!-- Texto para horario -->
+    <TextView
+        android:id="@+id/tvHorarioLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Seleccione el horario para agendar su cita"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:paddingTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/btnSeleccionarFecha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Spinner de horario -->
+
+
+    <!-- Botón enviar -->
+    <Spinner
+        android:id="@+id/spinnerHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/usuarioicon"
-        android:hint="@string/username_hint"
-        android:autofillHints="username"
-        android:inputType="textEmailAddress"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#B0FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoImage" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/passwordicon"
-        android:hint="@string/password_hint"
-        android:autofillHints="password"
-        android:inputType="textPassword"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#B0FFFFFF"
-        app:layout_constraintEnd_toEndOf="@id/username"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/username"
-        app:layout_constraintTop_toBottomOf="@id/username" />
-
-    <TextView
-        android:id="@+id/registerLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="@string/texto_registrate"
-        android:textColor="#A6FFFA"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/registerText"
-        app:layout_constraintTop_toTopOf="@id/registerText" />
+        app:layout_constraintTop_toBottomOf="@id/tvHorarioLabel" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="96dp"
-        android:background="@drawable/button_background"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="@string/login_button"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password" />
-
-    <TextView
-        android:id="@+id/registerText"
+        android:id="@+id/btnEnviarCita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/register_prompt"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
+        android:text="Agendar cita"
+        app:layout_constraintTop_toBottomOf="@id/spinnerHorario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#24C6DC"
+        android:layout_marginTop="35dp" />
+
+    <!-- Resultado de la cita -->
+    <TextView
+        android:id="@+id/tvResultadoCita"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="@drawable/redondoblanco_background"
+        app:layout_constraintTop_toBottomOf="@id/btnEnviarCita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
