@@ -60,7 +60,6 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
-
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.nav_home);
 
