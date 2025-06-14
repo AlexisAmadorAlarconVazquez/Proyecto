@@ -16,4 +16,10 @@
     <string name="confirm_password_hint">Confirmar Contraseña</string>
     <string name="text_complete_register_hint">Completa tu registro para acceder a todas las funciones de la aplicación</string>
     <string name="cita_hint">Agendar cita</string>
+    <string name="man_hint">Masculino</string>
+    <string name="woman_hint">Femenino</string>
+    <string name="other_hint">Otro</string>
+    <string name="registro_hint">Registro</string>
+    <string name="fecha_formateada">%1$d/%2$d/%3$d</string>
+
 </resources>
