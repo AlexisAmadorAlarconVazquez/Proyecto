@@ -18,7 +18,7 @@
             android:background="@drawable/redondoblanco_background"
             android:gravity="center"
             android:padding="12dp"
-            android:text="Registro"
+            android:hint="@string/registro_hint"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -68,19 +68,52 @@
             android:focusable="false"
             android:drawableStart="@drawable/calendaricon"
             android:background="@drawable/button_backgrond_lineas_white"
+            android:inputType="date"
             android:padding="12dp"
             android:minHeight="48dp"
             android:autofillHints="birthday"
             android:layout_marginTop="10dp" />
 
-        <!-- Género -->
-        <Spinner
-            android:id="@+id/spGenero"
+        <!-- Género con RadioButtons -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_backgrond_lineas_white"
-            android:minHeight="48dp"
-            android:layout_marginTop="10dp" />
+            android:hint="@string/gender_hint"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rgGenero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/man_hint"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/rbFemenino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/woman_hint"
+                android:textColor="@color/black"
+                android:layout_marginStart="20dp" />
+
+            <RadioButton
+                android:id="@+id/rbOtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/other_hint"
+                android:textColor="@color/black"
+                android:layout_marginStart="20dp" />
+        </RadioGroup>
+
 
         <!-- Email -->
         <EditText
