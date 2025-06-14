@@ -10,13 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,44 +51,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        new Thread(() -> {
-            try {
-                URL url = new URL("http://192.168.1.104/WebService/login.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        String url = "http://192.168.1.104:8080/WebService/login.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-                String postData = "username=" + URLEncoder.encode(username, StandardCharsets.UTF_8) +
-                        "&password=" + URLEncoder.encode(password, StandardCharsets.UTF_8);
-
-                OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), StandardCharsets.UTF_8);
-                writer.write(postData);
-                writer.flush();
-                writer.close();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-                String response = reader.readLine();
-                reader.close();
-
-                runOnUiThread(() -> {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
                     if (response != null) {
                         if (response.equalsIgnoreCase("success")) {
                             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                            // Aquí podrías ir a otra actividad
+                            // Aquí podrías redirigir a otra actividad si lo necesitas
                         } else {
                             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(this, "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show();
                     }
-                });
-
-                conn.disconnect();
-            } catch (Exception e) {
-                Log.e("LoginActivity", "Error en login", e);
-                runOnUiThread(() -> Toast.makeText(this, "Error de conexión", Toast.LENGTH_LONG).show());
+                },
+                error -> {
+                    Log.e("LoginActivity", "Error de conexión", error);
+                    Toast.makeText(this, "Error de conexión", Toast.LENGTH_LONG).show();
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("username", username);
+                parametros.put("password", password);
+                return parametros;
             }
-        }).start();
+        };
+
+        queue.add(stringRequest);
     }
 }
