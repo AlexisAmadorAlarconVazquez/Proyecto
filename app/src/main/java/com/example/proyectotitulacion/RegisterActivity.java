@@ -13,15 +13,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -91,47 +91,40 @@ public class RegisterActivity extends AppCompatActivity {
             RadioButton rbSeleccionado = findViewById(selectedId);
             String genero = rbSeleccionado.getText().toString();
 
-            new Thread(() -> {
-                try {
-                    URL url = new URL("http://192.168.1.104/WebService/registro.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-
-                    String parametros = "usuario=" + URLEncoder.encode(usuario, StandardCharsets.UTF_8) +
-                            "&nombre=" + URLEncoder.encode(nombre, StandardCharsets.UTF_8) +
-                            "&fecha=" + URLEncoder.encode(fecha, StandardCharsets.UTF_8) +
-                            "&genero=" + URLEncoder.encode(genero, StandardCharsets.UTF_8) +
-                            "&email=" + URLEncoder.encode(email, StandardCharsets.UTF_8) +
-                            "&password=" + URLEncoder.encode(password, StandardCharsets.UTF_8);
-
-                    OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), StandardCharsets.UTF_8);
-                    writer.write(parametros);
-                    writer.flush();
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-                    String respuesta = reader.readLine();
-
-                    runOnUiThread(() -> {
-                        if (respuesta != null) {
-                            Toast.makeText(this, respuesta, Toast.LENGTH_LONG).show();
-                            if (respuesta.toLowerCase().contains("éxito") || respuesta.toLowerCase().contains("exito")) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        } else {
-                            Toast.makeText(this, "Error al recibir respuesta", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    writer.close();
-                    reader.close();
-                } catch (Exception e) {
-                    Log.e("RegisterActivity", "Error en el registro", e);
-                    runOnUiThread(() -> Toast.makeText(this, "Error de conexión", Toast.LENGTH_LONG).show());
-                }
-            }).start();
+            registrarUsuario(usuario, nombre, fecha, genero, email, password);
         });
+    }
+
+    private void registrarUsuario(String usuario, String nombre, String fecha, String genero, String email, String password) {
+        String url = "http://192.168.1.104:8080/WebService/registro.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+                    if (response.toLowerCase().contains("éxito") || response.toLowerCase().contains("exito")) {
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                error -> {
+                    Toast.makeText(this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("VolleyError", error.toString());
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("usuario", usuario);
+                params.put("nombre", nombre);
+                params.put("fecha", fecha);
+                params.put("genero", genero);
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
     }
 }
