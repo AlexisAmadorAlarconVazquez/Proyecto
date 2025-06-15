@@ -184,6 +184,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/login_hint"
-            android:textColor="@color/black" />
+            android:textColor="@color/azul_boton"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 </ScrollView>

@@ -1,22 +1,34 @@
 package com.example.proyectotitulacion;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etUsuario, etNombre, etFecha, etEmail, etPass, etConfirmPass;
     RadioGroup rgGenero;
     Button btnRegistrar;
+    TextView tvIniciarSesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +43,19 @@ public class RegisterActivity extends AppCompatActivity {
         etConfirmPass = findViewById(R.id.etConfirmarPassword);
         rgGenero = findViewById(R.id.rgGenero);
         btnRegistrar = findViewById(R.id.btnRegistrar);
+        tvIniciarSesion = findViewById(R.id.tvIniciarSesion);
 
-        // Selección de fecha
-// Selección de fecha
+        tvIniciarSesion.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         etFecha.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
                     (view, year, month, dayOfMonth) -> {
-                        String fechaFormateada = getString(R.string.fecha_formateada, dayOfMonth, (month + 1), year);
+                        String fechaFormateada = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, (month + 1), dayOfMonth);
                         etFecha.setText(fechaFormateada);
                     },
                     calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
@@ -46,16 +63,25 @@ public class RegisterActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
 
-
-        // Registro
         btnRegistrar.setOnClickListener(v -> {
-            String pass = etPass.getText().toString();
-            String confirm = etConfirmPass.getText().toString();
+            String usuario = etUsuario.getText().toString().trim();
+            String nombre = etNombre.getText().toString().trim();
+            String fecha = etFecha.getText().toString().trim();
+            String email = etEmail.getText().toString().trim();
+            String password = etPass.getText().toString().trim();
+            String confirm = etConfirmPass.getText().toString().trim();
 
-            if (!pass.equals(confirm)) {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-            return;
+            if (usuario.isEmpty() || nombre.isEmpty() || fecha.isEmpty() ||
+                    email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if (!password.equals(confirm)) {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             int selectedId = rgGenero.getCheckedRadioButtonId();
             if (selectedId == -1) {
                 Toast.makeText(this, "Selecciona un género", Toast.LENGTH_SHORT).show();
@@ -65,9 +91,40 @@ public class RegisterActivity extends AppCompatActivity {
             RadioButton rbSeleccionado = findViewById(selectedId);
             String genero = rbSeleccionado.getText().toString();
 
-            Toast.makeText(this, "Registro exitoso\nGénero: " + genero, Toast.LENGTH_SHORT).show();
-
-            // Aquí podrías continuar con guardar en BD o pasar a otra actividad
+            registrarUsuario(usuario, nombre, fecha, genero, email, password);
         });
+    }
+
+    private void registrarUsuario(String usuario, String nombre, String fecha, String genero, String email, String password) {
+        String url = "http://192.168.1.104/WebService/registro.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+                    if (response.toLowerCase().contains("éxito") || response.toLowerCase().contains("exito")) {
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                error -> {
+                    Toast.makeText(this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("VolleyError", error.toString());
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("usuario", usuario);
+                params.put("nombre", nombre);
+                params.put("fecha", fecha);
+                params.put("genero", genero);
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
     }
 }
