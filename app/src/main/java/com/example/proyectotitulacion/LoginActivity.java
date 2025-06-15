@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        String url = "http://192.168.1.104:8080/WebService/login.php";
+        String url = "http://192.168.1.104/WebService/login.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
