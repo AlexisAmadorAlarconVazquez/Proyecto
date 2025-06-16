@@ -94,14 +94,14 @@
                 android:id="@+id/rbMasculino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/man_hint"
+                android:text="@string/man_hint"
                 android:textColor="@color/black" />
 
             <RadioButton
                 android:id="@+id/rbFemenino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/woman_hint"
+                android:text="@string/woman_hint"
                 android:textColor="@color/black"
                 android:layout_marginStart="20dp" />
 
@@ -109,7 +109,7 @@
                 android:id="@+id/rbOtro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/other_hint"
+                android:text="@string/other_hint"
                 android:textColor="@color/black"
                 android:layout_marginStart="20dp" />
         </RadioGroup>
