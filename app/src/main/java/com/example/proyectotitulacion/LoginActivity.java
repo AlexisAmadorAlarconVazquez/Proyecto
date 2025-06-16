@@ -15,32 +15,41 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+// IMPORTACIÓN NECESARIA PARA JSON
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText usernameEditText, passwordEditText;
+    EditText usernameEditText, passwordEditText; // Mantienes tus nombres de variables
     Button loginButton;
+    TextView registerLink; // Mantienes tu variable para el link de registro
+
+    // Asegúrate de que esta IP y ruta sean correctas y coincidan con tu servidor XAMPP
+    private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Asegúrate que este layout sea el correcto y contenga los IDs usados
         setContentView(R.layout.login_principal_main);
 
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
-        TextView registerLink = findViewById(R.id.registerLink);
+        usernameEditText = findViewById(R.id.username); // ID de tu EditText para usuario/email
+        passwordEditText = findViewById(R.id.password); // ID de tu EditText para contraseña
+        loginButton = findViewById(R.id.loginButton);   // ID de tu botón de login
+        registerLink = findViewById(R.id.registerLink); // ID de tu TextView para ir a registro
 
         loginButton.setOnClickListener(v -> {
-            String username = usernameEditText.getText().toString().trim();
+            String usuarioEmail = usernameEditText.getText().toString().trim(); // Cambié el nombre de la variable para mayor claridad
             String password = passwordEditText.getText().toString().trim();
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (usuarioEmail.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
             } else {
-                loginUser(username, password);
+                loginUser(usuarioEmail, password);
             }
         });
 
@@ -50,31 +59,66 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String username, String password) {
-        String url = "http://192.168.1.104/WebService/login.php";
+    private void loginUser(final String usuarioEmail, final String password) { // 'usuarioEmail' en lugar de 'username'
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
                 response -> {
-                    if (response != null) {
-                        if (response.equalsIgnoreCase("success")) {
-                            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                            // Aquí podrías redirigir a otra actividad si lo necesitas
+                    Log.d("LoginActivity", "Response: " + response); // Muy útil para depurar
+                    try {
+                        // ---- INICIO DEL PARSEO DE JSON ----
+                        JSONObject jsonResponse = new JSONObject(response);
+                        String status = jsonResponse.getString("status"); // Obtener el campo 'status' del JSON
+
+                        if ("success".equals(status)) {
+                            // Login exitoso
+                            String message = jsonResponse.getString("message"); // Obtener mensaje de éxito
+                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+
+                            // Opcional: Obtener datos del usuario si los enviaste desde PHP
+                            // if (jsonResponse.has("userData")) {
+                            //     JSONObject userData = jsonResponse.getJSONObject("userData");
+                            //     String nombreUsuario = userData.getString("usuario");
+                            //     // Podrías guardar nombreUsuario en SharedPreferences o pasarlo a HomeActivity
+                            // }
+
+                            // Navegar a HomeActivity
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            // Opcional: pasar datos a HomeActivity
+                            // intent.putExtra("NOMBRE_USUARIO", nombreUsuario); // Si obtuviste nombreUsuario
+                            startActivity(intent);
+                            finish(); // Finalizar LoginActivity para que no se pueda volver con el botón "atrás"
+
                         } else {
-                            Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                            // Login fallido u otro error del servidor
+                            String message = jsonResponse.getString("message"); // Obtener mensaje de error
+                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(this, "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show();
+                        // ---- FIN DEL PARSEO DE JSON ----
+// ...
+                    } catch (JSONException e) {
+                        // Error al parsear el JSON (respuesta inesperada del servidor)
+                        // e.printStackTrace(); // <--- PUEDES COMENTAR O ELIMINAR ESTA LÍNEA
+
+                        // Usa Log.e() pasando la excepción como el tercer argumento
+                        // para que el stack trace completo se imprima en Logcat bajo tu TAG.
+                        Log.e("LoginActivity", "JSON Parsing error: " + e.getMessage(), e);
+
+                        Toast.makeText(LoginActivity.this, "Error al procesar la respuesta del servidor.", Toast.LENGTH_SHORT).show();
                     }
+// ...
                 },
                 error -> {
-                    Log.e("LoginActivity", "Error de conexión", error);
-                    Toast.makeText(this, "Error de conexión", Toast.LENGTH_LONG).show();
+                    // Error de Volley (conexión, timeout, etc.)
+                    Log.e("LoginActivity", "Volley Error: " + error.toString());
+                    Toast.makeText(LoginActivity.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("username", username);
+                // ---- CAMBIO EN EL NOMBRE DEL PARÁMETRO ----
+                // El script PHP mejorado espera "usuario_o_email"
+                parametros.put("usuario_o_email", usuarioEmail);
                 parametros.put("password", password);
                 return parametros;
             }
