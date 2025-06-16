@@ -1,6 +1,7 @@
 package com.example.proyectotitulacion;
 
 import android.content.Intent;
+import android.content.SharedPreferences; // Necesario
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-// IMPORTACIÓN NECESARIA PARA JSON
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,31 +24,39 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText usernameEditText, passwordEditText; // Mantienes tus nombres de variables
+    EditText usernameEditText, passwordEditText;
     Button loginButton;
-    TextView registerLink; // Mantienes tu variable para el link de registro
+    TextView registerLink;
 
-    // Asegúrate de que esta IP y ruta sean correctas y coincidan con tu servidor XAMPP
     private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
+    private static final String TAG = "LoginActivity";
+
+    // --- Constantes para SharedPreferences (Solo para recordar usuario) ---
+    private static final String PREFS_APP_NAME = "MyLoginAppPrefs"; // Nombre del archivo de preferencias
+    private static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Clave para el último usuario ingresado
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Asegúrate que este layout sea el correcto y contenga los IDs usados
-        setContentView(R.layout.login_principal_main);
+        setContentView(R.layout.login_principal_main); // Asegúrate que este sea tu layout correcto
 
         usernameEditText = findViewById(R.id.username); // ID de tu EditText para usuario/email
         passwordEditText = findViewById(R.id.password); // ID de tu EditText para contraseña
-        loginButton = findViewById(R.id.loginButton);   // ID de tu botón de login
-        registerLink = findViewById(R.id.registerLink); // ID de tu TextView para ir a registro
+        loginButton = findViewById(R.id.loginButton);
+        registerLink = findViewById(R.id.registerLink);
+
+        // --- Cargar el último nombre de usuario guardado ---
+        loadLastUsername();
 
         loginButton.setOnClickListener(v -> {
-            String usuarioEmail = usernameEditText.getText().toString().trim(); // Cambié el nombre de la variable para mayor claridad
+            String usuarioEmail = usernameEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
 
             if (usuarioEmail.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
             } else {
+                // --- Guardar el nombre de usuario actual antes de intentar el login ---
+                saveUsername(usuarioEmail);
                 loginUser(usuarioEmail, password);
             }
         });
@@ -59,71 +67,83 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(final String usuarioEmail, final String password) { // 'usuarioEmail' en lugar de 'username'
+    private void loadLastUsername() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE);
+        String lastUsername = prefs.getString(KEY_LAST_USED_USERNAME, null); // null si no hay nada guardado
+        if (lastUsername != null) {
+            usernameEditText.setText(lastUsername);
+            Log.d(TAG, "Último usuario cargado: " + lastUsername);
+        }
+    }
+
+    private void saveUsername(String username) {
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE).edit();
+        editor.putString(KEY_LAST_USED_USERNAME, username);
+        editor.apply(); // Guardar asíncronamente
+        Log.d(TAG, "Usuario guardado para la próxima vez: " + username);
+    }
+
+    private void loginUser(final String usuarioEmail, final String password) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
                 response -> {
-                    Log.d("LoginActivity", "Response: " + response); // Muy útil para depurar
+                    Log.d(TAG, "Response: " + response);
                     try {
-                        // ---- INICIO DEL PARSEO DE JSON ----
                         JSONObject jsonResponse = new JSONObject(response);
-                        String status = jsonResponse.getString("status"); // Obtener el campo 'status' del JSON
+                        String status = jsonResponse.getString("status");
 
                         if ("success".equals(status)) {
-                            // Login exitoso
-                            String message = jsonResponse.getString("message"); // Obtener mensaje de éxito
+                            String message = jsonResponse.getString("message");
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
 
-                            // Opcional: Obtener datos del usuario si los enviaste desde PHP
-                            // if (jsonResponse.has("userData")) {
-                            //     JSONObject userData = jsonResponse.getJSONObject("userData");
-                            //     String nombreUsuario = userData.getString("usuario");
-                            //     // Podrías guardar nombreUsuario en SharedPreferences o pasarlo a HomeActivity
-                            // }
+                            // NO guardaremos estado de sesión aquí, solo el usuario ya se guardó
+                            // NO redirigiremos automáticamente aquí
 
-                            // Navegar a HomeActivity
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            // Opcional: pasar datos a HomeActivity
-                            // intent.putExtra("NOMBRE_USUARIO", nombreUsuario); // Si obtuviste nombreUsuario
+                            // Opcional: pasar datos del usuario a HomeActivity si es necesario
+                            // if (jsonResponse.has("userData")) {
+                            //    JSONObject userData = jsonResponse.getJSONObject("userData");
+                            //    String nombreUsuarioReal = userData.getString("usuario"); // Asumiendo que PHP lo devuelve
+                            //    intent.putExtra("USERNAME_FROM_SERVER", nombreUsuarioReal);
+                            // }
                             startActivity(intent);
-                            finish(); // Finalizar LoginActivity para que no se pueda volver con el botón "atrás"
+                            finish();
 
                         } else {
-                            // Login fallido u otro error del servidor
-                            String message = jsonResponse.getString("message"); // Obtener mensaje de error
+                            String message = jsonResponse.getString("message");
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
                         }
-                        // ---- FIN DEL PARSEO DE JSON ----
-// ...
                     } catch (JSONException e) {
-                        // Error al parsear el JSON (respuesta inesperada del servidor)
-                        // e.printStackTrace(); // <--- PUEDES COMENTAR O ELIMINAR ESTA LÍNEA
-
-                        // Usa Log.e() pasando la excepción como el tercer argumento
-                        // para que el stack trace completo se imprima en Logcat bajo tu TAG.
-                        Log.e("LoginActivity", "JSON Parsing error: " + e.getMessage(), e);
-
+                        Log.e(TAG, "JSON Parsing error: " + e.getMessage(), e);
                         Toast.makeText(LoginActivity.this, "Error al procesar la respuesta del servidor.", Toast.LENGTH_SHORT).show();
                     }
-// ...
                 },
                 error -> {
-                    // Error de Volley (conexión, timeout, etc.)
-                    Log.e("LoginActivity", "Volley Error: " + error.toString());
+                    Log.e(TAG, "Volley Error: " + error.toString(), error);
                     Toast.makeText(LoginActivity.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
-                // ---- CAMBIO EN EL NOMBRE DEL PARÁMETRO ----
-                // El script PHP mejorado espera "usuario_o_email"
                 parametros.put("usuario_o_email", usuarioEmail);
                 parametros.put("password", password);
                 return parametros;
             }
         };
-
         queue.add(stringRequest);
     }
+
+    // Opcional: Si quieres borrar el nombre de usuario recordado en algún punto (ej. logout)
+    // aunque en este escenario simplificado no estamos manejando un logout completo.
+    /*
+    private void clearSavedUsername() {
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE).edit();
+        editor.remove(KEY_LAST_USED_USERNAME);
+        // O también podrías guardar una cadena vacía:
+        // editor.putString(KEY_LAST_USED_USERNAME, "");
+        editor.apply();
+        Log.d(TAG, "Nombre de usuario recordado borrado.");
+    }
+    */
 }
