@@ -33,9 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
         if (message.isUserMessage()) {
             displayText = "Tú: " + message.getMessageText();
-            // Aquí podrías cambiar el color, la alineación, etc., para los mensajes del usuario
-            // Ejemplo: holder.messageTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
-            // Ejemplo: holder.messageTextView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.user_message_background));
+
         } else {
             displayText = "Bot: " + message.getMessageText();
             // Y aquí para los mensajes del bot

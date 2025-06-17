@@ -101,12 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                             // NO redirigiremos automáticamente aquí
 
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            // Opcional: pasar datos del usuario a HomeActivity si es necesario
-                            // if (jsonResponse.has("userData")) {
-                            //    JSONObject userData = jsonResponse.getJSONObject("userData");
-                            //    String nombreUsuarioReal = userData.getString("usuario"); // Asumiendo que PHP lo devuelve
-                            //    intent.putExtra("USERNAME_FROM_SERVER", nombreUsuarioReal);
-                            // }
                             startActivity(intent);
                             finish();
 
@@ -134,16 +128,5 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    // Opcional: Si quieres borrar el nombre de usuario recordado en algún punto (ej. logout)
-    // aunque en este escenario simplificado no estamos manejando un logout completo.
-    /*
-    private void clearSavedUsername() {
-        SharedPreferences.Editor editor = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE).edit();
-        editor.remove(KEY_LAST_USED_USERNAME);
-        // O también podrías guardar una cadena vacía:
-        // editor.putString(KEY_LAST_USED_USERNAME, "");
-        editor.apply();
-        Log.d(TAG, "Nombre de usuario recordado borrado.");
-    }
-    */
+
 }
