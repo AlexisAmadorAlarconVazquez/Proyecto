@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView registerLink;
 
-    private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
+    private static final String LOGIN_URL = "http://192.168.0.4/WebService/login.php";
     private static final String TAG = "LoginActivity";
 
     // --- Constantes para SharedPreferences (Solo para recordar usuario) ---
