@@ -1,7 +1,7 @@
 package com.example.proyectotitulacion;
 
 import android.content.Intent;
-import android.content.SharedPreferences; // Necesario
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -31,21 +31,22 @@ public class LoginActivity extends AppCompatActivity {
     private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
     private static final String TAG = "LoginActivity";
 
-    // --- Constantes para SharedPreferences (Solo para recordar usuario) ---
-    private static final String PREFS_APP_NAME = "MyLoginAppPrefs"; // Nombre del archivo de preferencias
-    private static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Clave para el último usuario ingresado
+    // --- Constantes para SharedPreferences ---
+    public static final String PREFS_APP_NAME = "MyLoginAppPrefs"; // Nombre del archivo de preferencias (hecho public para posible uso en otras clases)
+    public static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Clave para el último usuario ingresado
+    // *** NUEVA CONSTANTE PARA EL IDENTIFICADOR DEL USUARIO ACTUAL ***
+    public static final String KEY_CURRENT_USER_IDENTIFIER = "CURRENT_USER_IDENTIFIER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_principal_main); // Asegúrate que este sea tu layout correcto
+        setContentView(R.layout.login_principal_main);
 
-        usernameEditText = findViewById(R.id.username); // ID de tu EditText para usuario/email
-        passwordEditText = findViewById(R.id.password); // ID de tu EditText para contraseña
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         registerLink = findViewById(R.id.registerLink);
 
-        // --- Cargar el último nombre de usuario guardado ---
         loadLastUsername();
 
         loginButton.setOnClickListener(v -> {
@@ -55,8 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             if (usuarioEmail.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
             } else {
-                // --- Guardar el nombre de usuario actual antes de intentar el login ---
-                saveUsername(usuarioEmail);
+                saveUsername(usuarioEmail); // Guardar para recordar el último usuario
                 loginUser(usuarioEmail, password);
             }
         });
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loadLastUsername() {
         SharedPreferences prefs = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE);
-        String lastUsername = prefs.getString(KEY_LAST_USED_USERNAME, null); // null si no hay nada guardado
+        String lastUsername = prefs.getString(KEY_LAST_USED_USERNAME, null);
         if (lastUsername != null) {
             usernameEditText.setText(lastUsername);
             Log.d(TAG, "Último usuario cargado: " + lastUsername);
@@ -79,11 +79,11 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUsername(String username) {
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE).edit();
         editor.putString(KEY_LAST_USED_USERNAME, username);
-        editor.apply(); // Guardar asíncronamente
+        editor.apply();
         Log.d(TAG, "Usuario guardado para la próxima vez: " + username);
     }
 
-    private void loginUser(final String usuarioEmail, final String password) {
+    private void loginUser(final String usuarioEmailInput, final String password) { // Renombré usuarioEmail a usuarioEmailInput para claridad
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
@@ -97,10 +97,46 @@ public class LoginActivity extends AppCompatActivity {
                             String message = jsonResponse.getString("message");
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
 
-                            // NO guardaremos estado de sesión aquí, solo el usuario ya se guardó
-                            // NO redirigiremos automáticamente aquí
+                            // --- GUARDAR EL IDENTIFICADOR DEL USUARIO ACTUAL ---
+                            String currentUserIdentifier = "";
+                            // Intenta obtener un identificador del objeto "userData" si tu PHP lo devuelve
+                            // Ajusta "id", "usuario_o_email" a las claves reales que devuelve tu login.php
+                            if (jsonResponse.has("userData")) {
+                                JSONObject userData = jsonResponse.getJSONObject("userData");
+                                if (userData.has("id")) { // Ejemplo: si tu PHP devuelve un campo 'id'
+                                    currentUserIdentifier = String.valueOf(userData.getInt("id"));
+                                } else if (userData.has("usuario_o_email")) { // Ejemplo: si devuelve 'usuario_o_email'
+                                    currentUserIdentifier = userData.getString("usuario_o_email");
+                                } else if (userData.has("email")) { // Ejemplo: si devuelve 'email'
+                                    currentUserIdentifier = userData.getString("email");
+                                }
+                                // Añade más 'else if' si el identificador puede estar bajo otras claves
+                            }
+
+                            // Si no se encontró un identificador específico en userData,
+                            // podemos usar el email/usuario que el usuario ingresó para el login.
+                            // Esto asume que el 'usuarioEmailInput' es un identificador único válido.
+                            if (currentUserIdentifier.isEmpty()) {
+                                currentUserIdentifier = usuarioEmailInput;
+                                Log.w(TAG, "No se encontró un identificador específico en la respuesta del login. Usando el input: " + currentUserIdentifier);
+                            }
+
+
+                            if (!currentUserIdentifier.isEmpty()) {
+                                SharedPreferences prefs = getSharedPreferences(PREFS_APP_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString(KEY_CURRENT_USER_IDENTIFIER, currentUserIdentifier);
+                                editor.apply();
+                                Log.i(TAG, "Identificador de usuario actual guardado: " + currentUserIdentifier);
+                            } else {
+                                Log.e(TAG, "¡ALERTA! No se pudo obtener/determinar un identificador de usuario para guardar en SharedPreferences.");
+
+                            }
+                            // ----------------------------------------------------
 
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            // Considera añadir flags si necesitas limpiar el stack de actividades
+                            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
 
@@ -120,13 +156,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("usuario_o_email", usuarioEmail);
+                parametros.put("usuario_o_email", usuarioEmailInput);
                 parametros.put("password", password);
                 return parametros;
             }
         };
         queue.add(stringRequest);
     }
-
-
 }
