@@ -18,7 +18,7 @@
             android:background="@drawable/redondoblanco_background"
             android:gravity="center"
             android:padding="12dp"
-            android:hint="@string/registro_hint"
+            android:text="@string/registro_hint"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
+            android:textColor="@color/black"
             android:layout_marginTop="15dp" />
 
         <!-- Usuario -->
@@ -78,7 +79,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/gender_hint"
+            android:text="@string/gender_hint"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:textColor="@color/black" />
