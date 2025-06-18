@@ -34,7 +34,6 @@ public class PerfilActivity extends AppCompatActivity {
     private static final String GET_PROFILE_URL = "http://192.168.1.104/WebService/get_profile_data.php";
     private static final String UPDATE_PROFILE_URL = "http://192.168.1.104/WebService/update_profile.php";
     private static final String DELETE_PROFILE_URL = "http://192.168.1.104/WebService/delete_profile.php";
-
     @SuppressWarnings("FieldCanBeLocal")
     private TextView tvUsuario;
     @SuppressWarnings("FieldCanBeLocal")
@@ -43,7 +42,6 @@ public class PerfilActivity extends AppCompatActivity {
     private TextView tvEmail;
     private TextView tvFechaNacimiento;
     private TextView tvGenero;
-
     private EditText etUsuario;
     private EditText etNombre;
     private EditText etEmail;
