@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             dialog.show();
         });
-
         btnEnviarCita.setOnClickListener(v -> {
             horarioSeleccionado = spinnerHorario.getSelectedItem().toString();
             if (fechaFinal != null) {
@@ -74,10 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Por favor selecciona una fecha", Toast.LENGTH_SHORT).show();
             }
         });
-
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.nav_calendar); // Resalta el ítem actual
-
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_calendar) {
@@ -107,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
-            }
-            return false;
+            }return false;
         });
 
 

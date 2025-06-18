@@ -8,7 +8,6 @@
     android:padding="26dp"
     android:background="@drawable/background_pantallasgenerales"
     tools:context=".MainActivity">
-
     <!-- Título en cuadro blanco -->
     <TextView
         android:id="@+id/tvTitulo"
