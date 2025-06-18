@@ -33,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mapsFragmentContainer, new MapsFragment())
+                .commit();
         viewPager = findViewById(R.id.imageSlider);
         ImageAdapter adapter = new ImageAdapter(images);
         viewPager.setAdapter(adapter);
