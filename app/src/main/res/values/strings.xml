@@ -25,6 +25,7 @@
     <string name="chat_message_hint">Escribe un mensaje</string>
     <string name="chat_send_button_text">Enviar</string>
     <string name="user_profile_text">Perfil de Usuario</string>
+
     <!--    <string name="edit_profile_text">Editar Perfil</string> &lt;!&ndash; Unificada, usa "editar_perfil" &ndash;&gt;-->
     <string name="name_user_text">Nombre de usuario</string>
     <string name="example_email">alexis_av@tesch.edu.mx</string>
