@@ -40,7 +40,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 
     // Volley agregado correctamente
     implementation(libs.volley)
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+
 }
