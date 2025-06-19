@@ -70,7 +70,6 @@
     <string name="chat_selected_toast">Chat seleccionado</string>
     <string name="not_available_placeholder">N/A</string> <!-- Placeholder para datos no disponibles -->
 
-    <!-- Strings para prefijos de errores y mensajes de servidor -->
     <string name="server_error_prefix">Error del servidor: </string>
     <string name="profile_update_error_prefix">Error al guardar: </string>
     <string name="error_processing_save_response">Error al procesar respuesta del guardado.</string>
