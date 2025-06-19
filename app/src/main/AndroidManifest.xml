@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoTitulacion">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCCKWtqvnAT5EXxX7KhMoCRM_r_du-iPnw" />
 
         <!-- Pantalla principal -->
         <activity
