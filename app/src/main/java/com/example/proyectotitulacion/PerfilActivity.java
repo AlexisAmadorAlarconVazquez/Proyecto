@@ -31,9 +31,9 @@ import java.util.Map;
 public class PerfilActivity extends AppCompatActivity {
 
     private static final String TAG = "PerfilActivity";
-    private static final String GET_PROFILE_URL = "http://192.168.218.78/WebService/get_profile_data.php";
-    private static final String UPDATE_PROFILE_URL = "http://192.168.218.78/WebService/update_profile.php";
-    private static final String DELETE_PROFILE_URL = "http://192.168.218.78/WebService/delete_profile.php";
+    private static final String GET_PROFILE_URL = "http://192.168.100.207/WebService/get_profile_data.php";
+    private static final String UPDATE_PROFILE_URL = "http://192.168.100.207/WebService/update_profile.php";
+    private static final String DELETE_PROFILE_URL = "192.168.100.207/WebService/delete_profile.php";
 
     @SuppressWarnings("FieldCanBeLocal")
     private TextView tvUsuario;
@@ -49,10 +49,8 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etFechaNacimiento;
     private EditText etGenero;
-
     private ImageButton btnEditarPerfil;
     private LinearLayout llBotonesEdicion;
-    // btnGuardarCambios, btnCancelarCambios, btnBorrarPerfil se convertirán en locales en onCreate
     private Button btnCerrarSesion;
     private ProgressBar progressBarPerfil;
 
@@ -131,8 +129,8 @@ public class PerfilActivity extends AppCompatActivity {
             loadUserProfile();
         });
 
-        btnGuardarCambios.setOnClickListener(v -> saveUserProfileChanges()); // Usa la variable local
-        btnBorrarPerfil.setOnClickListener(v -> mostrarDialogoConfirmacionBorrado()); // Usa la variable local
+        btnGuardarCambios.setOnClickListener(v -> saveUserProfileChanges());
+        btnBorrarPerfil.setOnClickListener(v -> mostrarDialogoConfirmacionBorrado());
         btnCerrarSesion.setOnClickListener(v -> mostrarDialogoConfirmacionCerrarSesion());
 
         setEditMode(false);

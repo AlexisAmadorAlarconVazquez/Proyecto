@@ -1,17 +1,13 @@
-// ChatMessage.java
-package com.example.proyectotitulacion; // Asegúrate que el paquete sea el correcto
+package com.example.proyectotitulacion;
 
 public class ChatMessage {
-    private final String messageText; // <-- MODIFICADO: añadido 'final'
-    private final boolean isUserMessage; // <-- MODIFICADO: añadido 'final'
+    private final String messageText;
+    private final boolean isUserMessage;
 
-    // Constructor
     public ChatMessage(String messageText, boolean isUserMessage) {
         this.messageText = messageText;
         this.isUserMessage = isUserMessage;
     }
-
-    // Getters
     public String getMessageText() {
         return messageText;
     }

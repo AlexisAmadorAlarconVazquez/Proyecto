@@ -126,8 +126,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initializeBotResponses() {
         botResponses = new HashMap<>();
-
-        // Saludos y general (Adaptados para FisioBot)
+        
         botResponses.put("hola", new String[]{
                 "¡Hola! Soy tu asistente virtual de fisioterapia. ¿En qué puedo ayudarte hoy?",
                 "¡Qué tal! Listo para ayudarte con tus consultas de fisioterapia.",

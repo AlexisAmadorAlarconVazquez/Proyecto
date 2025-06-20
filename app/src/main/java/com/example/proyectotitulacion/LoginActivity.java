@@ -28,13 +28,13 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView registerLink;
 
-    private static final String LOGIN_URL = "http://192.168.218.78/WebService/login.php";
+    private static final String LOGIN_URL = "http://192.168.100.207/WebService/login.php";
     private static final String TAG = "LoginActivity";
 
     // --- Constantes para SharedPreferences ---
-    public static final String PREFS_APP_NAME = "MyLoginAppPrefs"; // Nombre del archivo de preferencias (hecho public para posible uso en otras clases)
-    public static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Clave para el último usuario ingresado
-    // *** NUEVA CONSTANTE PARA EL IDENTIFICADOR DEL USUARIO ACTUAL ***
+    public static final String PREFS_APP_NAME = "MyLoginAppPrefs";
+    public static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Contraseña guardada para recordar el último usuario
+    // --- Identificar Usuario que se guardo anteriormente ***
     public static final String KEY_CURRENT_USER_IDENTIFIER = "CURRENT_USER_IDENTIFIER";
 
     @Override
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Usuario guardado para la próxima vez: " + username);
     }
 
-    private void loginUser(final String usuarioEmailInput, final String password) { // Renombré usuarioEmail a usuarioEmailInput para claridad
+    private void loginUser(final String usuarioEmailInput, final String password) { // Renombré usuarioEmail a usuarioEmail
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
@@ -99,23 +99,18 @@ public class LoginActivity extends AppCompatActivity {
 
                             // --- GUARDAR EL IDENTIFICADOR DEL USUARIO ACTUAL ---
                             String currentUserIdentifier = "";
-                            // Intenta obtener un identificador del objeto "userData" si tu PHP lo devuelve
-                            // Ajusta "id", "usuario_o_email" a las claves reales que devuelve tu login.php
                             if (jsonResponse.has("userData")) {
                                 JSONObject userData = jsonResponse.getJSONObject("userData");
-                                if (userData.has("id")) { // Ejemplo: si tu PHP devuelve un campo 'id'
+                                if (userData.has("id")) {
                                     currentUserIdentifier = String.valueOf(userData.getInt("id"));
-                                } else if (userData.has("usuario_o_email")) { // Ejemplo: si devuelve 'usuario_o_email'
+                                } else if (userData.has("usuario_o_email")) {
                                     currentUserIdentifier = userData.getString("usuario_o_email");
-                                } else if (userData.has("email")) { // Ejemplo: si devuelve 'email'
+                                } else if (userData.has("email")) {
                                     currentUserIdentifier = userData.getString("email");
                                 }
-                                // Añade más 'else if' si el identificador puede estar bajo otras claves
                             }
 
-                            // Si no se encontró un identificador específico en userData,
-                            // podemos usar el email/usuario que el usuario ingresó para el login.
-                            // Esto asume que el 'usuarioEmailInput' es un identificador único válido.
+                            // Si el Usuario no se encontro entonces mandara un mensaje y buscara el email a cambio del usuario
                             if (currentUserIdentifier.isEmpty()) {
                                 currentUserIdentifier = usuarioEmailInput;
                                 Log.w(TAG, "No se encontró un identificador específico en la respuesta del login. Usando el input: " + currentUserIdentifier);
@@ -132,14 +127,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e(TAG, "¡ALERTA! No se pudo obtener/determinar un identificador de usuario para guardar en SharedPreferences.");
 
                             }
-                            // ----------------------------------------------------
-
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            // Considera añadir flags si necesitas limpiar el stack de actividades
-                            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
-
                         } else {
                             String message = jsonResponse.getString("message");
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();

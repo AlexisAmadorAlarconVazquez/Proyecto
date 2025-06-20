@@ -71,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
             String password = etPass.getText().toString().trim();
             String confirm = etConfirmPass.getText().toString().trim();
 
+// en caso de que no se cumpla con los campos mandar los siguientes mensajes
             if (usuario.isEmpty() || nombre.isEmpty() || fecha.isEmpty() ||
                     email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
@@ -90,13 +91,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             RadioButton rbSeleccionado = findViewById(selectedId);
             String genero = rbSeleccionado.getText().toString();
-
             registrarUsuario(usuario, nombre, fecha, genero, email, password);
         });
     }
-
+// LOGIN EXITOSO
     private void registrarUsuario(String usuario, String nombre, String fecha, String genero, String email, String password) {
-        String url = "http://192.168.218.78/WebService/registro.php";
+        String url = "http://192.168.100.207/WebService/registro.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                     }
                 },
-                error -> {
+                error -> {   /// Error de conexión con el servidor
                     Toast.makeText(this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e("VolleyError", error.toString());
                 }) {
@@ -124,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(stringRequest);
     }
 }
