@@ -24,14 +24,19 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/tituloHome"
-                android:text="HOME"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
+                android:id="@+id/home"
+                android:layout_width="251dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp" />
+                android:text="HOME"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/redondoblanco_background"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/imageSlider"
