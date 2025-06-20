@@ -96,7 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 // LOGIN EXITOSO
     private void registrarUsuario(String usuario, String nombre, String fecha, String genero, String email, String password) {
-        String url = "http://192.168.137.1/WebService/registro.php";
+        String url = "" +
+                "http://192.168.137.1/WebService/registro.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
