@@ -1,5 +1,4 @@
-// ChatAdapter.java
-package com.example.proyectotitulacion; // Asegúrate que el paquete sea el correcto
+package com.example.proyectotitulacion;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +10,12 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
 
-    private final List<ChatMessage> messageList; // <-- MODIFICADO: añadido 'final'
+    private final List<ChatMessage> messageList;
 
     // Constructor
     public ChatAdapter(List<ChatMessage> messageList) {
         this.messageList = messageList;
     }
-
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -25,7 +23,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                 .inflate(android.R.layout.simple_list_item_1, parent, false);
         return new MessageViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         ChatMessage message = messageList.get(position);
@@ -36,19 +33,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
         } else {
             displayText = "Bot: " + message.getMessageText();
-            // Y aquí para los mensajes del bot
-            // Ejemplo: holder.messageTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         }
         holder.messageTextView.setText(displayText);
     }
-
     @Override
     public int getItemCount() {
         return messageList.size();
     }
-
-    // ViewHolder para cada mensaje
-    // MODIFICADO: cambiado a 'public static'
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
 

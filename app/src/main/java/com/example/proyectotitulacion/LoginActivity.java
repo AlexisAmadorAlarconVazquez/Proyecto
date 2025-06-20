@@ -27,14 +27,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     Button loginButton;
     TextView registerLink;
-
-    private static final String LOGIN_URL = "http://192.168.100.207/WebService/login.php";
+    private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
     private static final String TAG = "LoginActivity";
-
-    // --- Constantes para SharedPreferences ---
     public static final String PREFS_APP_NAME = "MyLoginAppPrefs";
-    public static final String KEY_LAST_USED_USERNAME = "lastUsername"; // Contraseña guardada para recordar el último usuario
-    // --- Identificar Usuario que se guardo anteriormente ***
+    public static final String KEY_LAST_USED_USERNAME = "lastUsername";
     public static final String KEY_CURRENT_USER_IDENTIFIER = "CURRENT_USER_IDENTIFIER";
 
     @Override
@@ -56,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             if (usuarioEmail.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
             } else {
-                saveUsername(usuarioEmail); // Guardar para recordar el último usuario
+                saveUsername(usuarioEmail); // Guardar el nombre de usuario
                 loginUser(usuarioEmail, password);
             }
         });
@@ -83,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Usuario guardado para la próxima vez: " + username);
     }
 
-    private void loginUser(final String usuarioEmailInput, final String password) { // Renombré usuarioEmail a usuarioEmail
+    private void loginUser(final String usuarioEmailInput, final String password) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
@@ -97,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                             String message = jsonResponse.getString("message");
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
 
-                            // --- GUARDAR EL IDENTIFICADOR DEL USUARIO ACTUAL ---
+                            //Guarda el usuario actual
                             String currentUserIdentifier = "";
                             if (jsonResponse.has("userData")) {
                                 JSONObject userData = jsonResponse.getJSONObject("userData");
@@ -110,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
 
-                            // Si el Usuario no se encontro entonces mandara un mensaje y buscara el email a cambio del usuario
+                            // Si el Usuario no se encontro entonces mandara un mensaje
                             if (currentUserIdentifier.isEmpty()) {
                                 currentUserIdentifier = usuarioEmailInput;
                                 Log.w(TAG, "No se encontró un identificador específico en la respuesta del login. Usando el input: " + currentUserIdentifier);

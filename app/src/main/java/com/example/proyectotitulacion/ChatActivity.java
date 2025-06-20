@@ -28,16 +28,15 @@ import java.util.Random;
 
 public class ChatActivity extends AppCompatActivity {
 
-    // --- Variables para el Chatbot ---
     private RecyclerView recyclerViewChat;
     private EditText editTextChatMessage;
-    @SuppressWarnings("FieldCanBeLocal") // Suprime la advertencia para buttonSendMessage
-    private Button buttonSendMessage;    // <-- MODIFICACIÓN AQUÍ
+    @SuppressWarnings("FieldCanBeLocal") // Suprime
+    private Button buttonSendMessage;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> messageList;
-    @SuppressWarnings("FieldCanBeLocal") // Suprime la advertencia para botResponses, ya que es necesario como campo
+    @SuppressWarnings("FieldCanBeLocal")
     private Map<String, String[]> botResponses;
-    // --- Fin Variables para el Chatbot ---
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +57,7 @@ public class ChatActivity extends AppCompatActivity {
 
         if (recyclerViewChat == null || editTextChatMessage == null || buttonSendMessage == null) {
             Toast.makeText(this, "Error: Faltan vistas en el layout activity_chat.xml", Toast.LENGTH_LONG).show();
-            // Podrías incluso llamar a finish() aquí si el chat no puede funcionar.
-            // finish();
-            return; // No continuar si las vistas esenciales faltan
+            return;
         }
 
         messageList = new ArrayList<>();
@@ -83,10 +80,10 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        // Saludo inicial del bot (opcional)
+
         addMessage("¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte?", false);
 
-        // --- Código Original del BottomNavigationView ---
+        // MENU
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         if (nav != null) {
             nav.setSelectedItemId(R.id.nav_chat);
@@ -107,14 +104,9 @@ public class ChatActivity extends AppCompatActivity {
                 return false;
             });
         } else {
-            // Se añade un Log o comentario para que el 'else' no esté vacío
             Log.w("ChatActivity", "BottomNavigationView (R.id.bottomNavigationView) no encontrado en el layout.");
-            // Opcional: Toast.makeText(this, "Error de UI: Navegación no disponible", Toast.LENGTH_SHORT).show();
         }
-        // --- Fin Código Original del BottomNavigationView ---
     }
-
-    // --- Métodos del Chatbot ---
     private void addMessage(String text, boolean isUser) {
         if (chatAdapter == null || messageList == null || recyclerViewChat == null) return;
 
@@ -155,7 +147,7 @@ public class ChatActivity extends AppCompatActivity {
                 "Puedes llamarme Asistente Fisio."
         });
 
-        // Horarios de Atención (Actualizado y detallado)
+        //Horarios de Atención
         botResponses.put("horario", new String[]{
                 "Nuestros horarios de atención son de lunes a viernes de 8:00 AM a 2:00 PM. Ten en cuenta que el horario de 1:00 PM a 2:00 PM no está disponible para citas.",
                 "Atendemos de lunes a viernes. Puedes agendar citas entre las 8:00 AM y la 1:00 PM. El bloque de 1:00 PM a 2:00 PM está reservado. Cerramos a las 2:00 PM.",
@@ -188,7 +180,7 @@ public class ChatActivity extends AppCompatActivity {
         botResponses.put("domingo", new String[]{"No abrimos los domingos.", "Los domingos la clínica está cerrada."});
         botResponses.put("fin de semana", new String[]{"Durante el fin de semana (sábado y domingo) la clínica permanece cerrada."});
 
-        // Citas (Actualizado)
+        //Citas
         botResponses.put("cita", new String[]{
                 "Puedo ayudarte con información sobre citas. ¿Quieres saber cómo agendar, consultar horarios disponibles o cancelar una cita?",
                 "Para citas, nuestros horarios son de L-V de 8:00 AM a 2:00 PM (excepto 1:00 PM). ¿Necesitas agendar?"
@@ -259,7 +251,6 @@ public class ChatActivity extends AppCompatActivity {
         }
         addMessage(botReply, false);
     }
-
     private void startNewActivity(Class<?> activityClass) {
         Intent intent = new Intent(this, activityClass);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

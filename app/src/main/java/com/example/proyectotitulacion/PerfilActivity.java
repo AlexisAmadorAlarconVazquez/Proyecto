@@ -31,9 +31,9 @@ import java.util.Map;
 public class PerfilActivity extends AppCompatActivity {
 
     private static final String TAG = "PerfilActivity";
-    private static final String GET_PROFILE_URL = "http://192.168.100.207/WebService/get_profile_data.php";
-    private static final String UPDATE_PROFILE_URL = "http://192.168.100.207/WebService/update_profile.php";
-    private static final String DELETE_PROFILE_URL = "192.168.100.207/WebService/delete_profile.php";
+    private static final String GET_PROFILE_URL = "http://192.168.1.104/WebService/get_profile_data.php";
+    private static final String UPDATE_PROFILE_URL = "http://192.168.1.104/WebService/update_profile.php";
+    private static final String DELETE_PROFILE_URL = "http://192.168.1.104/WebService/delete_profile.php";
 
     @SuppressWarnings("FieldCanBeLocal")
     private TextView tvUsuario;
