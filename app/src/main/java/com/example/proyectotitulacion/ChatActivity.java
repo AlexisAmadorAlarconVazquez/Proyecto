@@ -1,15 +1,10 @@
 package com.example.proyectotitulacion;
-
 import android.content.Intent;
 import android.os.Bundle;
-// Si no vas a usar Handler/Looper para el retraso del bot, puedes eliminar estas líneas:
-// import android.os.Handler;
-// import android.os.Looper;
-import android.util.Log; // Importado para el Log en el 'else'
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,9 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
