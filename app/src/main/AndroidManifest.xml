@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,12 +12,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProyectoTitulacion"
-        tools:targetApi="31">
+        android:theme="@style/Theme.ProyectoTitulacion">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCCKWtqvnAT5EXxX7KhMoCRM_r_du-iPnw" />
 
         <!-- Pantalla principal -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,24 +28,25 @@
             </intent-filter>
         </activity>
 
-        <!-- Pantalla de Registro -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
-
-        <!-- Otras pantallas del primer archivo -->
+            android:exported="false" />
         <activity
             android:name=".PerfilActivity"
             android:exported="false" />
-        <activity
-            android:name=".CategoriasActivity"
-            android:exported="false" />
+
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
             android:exported="false" />
+
+        <!-- AÑADE ESTA DECLARACIÓN PARA MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <!-- FIN DE LA DECLARACIÓN AÑADIDA -->
 
     </application>
 

@@ -9,7 +9,6 @@
     android:background="@drawable/background_pantallasgenerales"
     tools:context=".MainActivity">
 
-    <!-- Título en cuadro blanco -->
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="251dp"
@@ -25,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Fecha seleccionada -->
     <TextView
         android:id="@+id/tvFechaSeleccionada"
         android:layout_width="0dp"
@@ -39,7 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón para seleccionar fecha -->
     <Button
         android:id="@+id/btnSeleccionarFecha"
         android:layout_width="wrap_content"
@@ -49,9 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="#24C6DC"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
-    <!-- Texto para horario -->
     <TextView
         android:id="@+id/tvHorarioLabel"
         android:layout_width="0dp"
@@ -60,20 +56,16 @@
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="16sp"
-        android:paddingTop="40dp"
+        android:paddingTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/btnSeleccionarFecha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Spinner de horario -->
-
-
-    <!-- Botón enviar -->
     <Spinner
         android:id="@+id/spinnerHorario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,9 +80,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="#24C6DC"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="10dp" />
 
-    <!-- Resultado de la cita -->
     <TextView
         android:id="@+id/tvResultadoCita"
         android:layout_width="300dp"
@@ -103,20 +94,49 @@
         app:layout_constraintTop_toBottomOf="@id/btnEnviarCita"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvResultadoCita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+
+        <Button
+            android:id="@+id/btnConsultarCitas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consultar mis citas"
+            android:backgroundTint="#24C6DC"
+            android:layout_marginTop="10dp" />
+
+        <com.example.proyectotitulacion.LockableListView
+            android:id="@+id/listaCitas"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_weight="10"
+            android:background="@color/black"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" />
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#000"
-        app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

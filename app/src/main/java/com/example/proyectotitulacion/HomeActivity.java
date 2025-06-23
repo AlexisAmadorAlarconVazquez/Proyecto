@@ -2,26 +2,64 @@ package com.example.proyectotitulacion;
 
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.viewpager2.widget.ViewPager2;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.viewpager2.widget.ViewPager2;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
+    private ViewPager2 viewPager;
+    private int[] images = {
+            R.drawable.imagen1,
+            R.drawable.imagen2,
+            R.drawable.imagen3,
+            R.drawable.imagen4
+    };
+    private int currentPage = 0;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mapsFragmentContainer, new MapsFragment())
+                .commit();
+        viewPager = findViewById(R.id.imageSlider);
+        ImageAdapter adapter = new ImageAdapter(images);
+        viewPager.setAdapter(adapter);
+
+// Carrusel automático
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                viewPager.post(() -> {
+                    currentPage = (currentPage + 1) % images.length;
+                    viewPager.setCurrentItem(currentPage, true);
+                });
+            }
+        }, 3000, 3000); // 3 segundos
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
+
         });
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
@@ -37,14 +75,9 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
+
             } else if (id == R.id.nav_chat) {
-                Intent intent = new Intent(this, com.example.proyectotitulacion.ChatActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
-                return true;
-            } else if (id == R.id.nav_categories) {
-                Intent intent = new Intent(this, CategoriasActivity.class);
+                Intent intent = new Intent(this, ChatActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
@@ -58,7 +91,13 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
-
+    }
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            if (timer != null) {
+                timer.cancel();
+            }
 
     }
 }
