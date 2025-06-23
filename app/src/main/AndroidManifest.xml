@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -19,7 +23,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCCKWtqvnAT5EXxX7KhMoCRM_r_du-iPnw" />
 
-        <!-- Pantalla principal -->
         <activity
             android:name=".Login.LoginActivity"
             android:exported="true">
@@ -39,15 +42,14 @@
         <activity
             android:name=".Mapa.HomeActivity"
             android:exported="false" />
+
         <activity
             android:name=".ChatBot.ChatActivity"
             android:exported="false" />
 
-        <!-- AÑADE ESTA DECLARACIÓN PARA MainActivity -->
         <activity
             android:name=".Citas.MainActivity"
             android:exported="false" />
-        <!-- FIN DE LA DECLARACIÓN AÑADIDA -->
 
     </application>
 
