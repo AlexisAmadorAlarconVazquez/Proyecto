@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.ChatBot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.proyectotitulacion.Mapa.HomeActivity;
+import com.example.proyectotitulacion.Citas.MainActivity;
+import com.example.proyectotitulacion.PerfilUsuario.PerfilActivity;
+import com.example.proyectotitulacion.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.HashMap;

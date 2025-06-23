@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.PerfilUsuario;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +20,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.proyectotitulacion.Login.LoginActivity;
+import com.example.proyectotitulacion.Mapa.HomeActivity;
+import com.example.proyectotitulacion.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
@@ -31,9 +34,9 @@ import java.util.Map;
 public class PerfilActivity extends AppCompatActivity {
 
     private static final String TAG = "PerfilActivity";
-    private static final String GET_PROFILE_URL = "http://192.168.1.103/WebService/get_profile_data.php";
-    private static final String UPDATE_PROFILE_URL = "http://192.168.1.103/WebService/update_profile.php";
-    private static final String DELETE_PROFILE_URL = "http://192.168.1.103/WebService/delete_profile.php";
+    private static final String GET_PROFILE_URL = "http://192.168.1.104/WebService/get_profile_data.php";
+    private static final String UPDATE_PROFILE_URL = "http://192.168.1.104/WebService/update_profile.php";
+    private static final String DELETE_PROFILE_URL = "http://192.168.1.104/WebService/delete_profile.php";
 
     @SuppressWarnings("FieldCanBeLocal")
     private TextView tvUsuario;

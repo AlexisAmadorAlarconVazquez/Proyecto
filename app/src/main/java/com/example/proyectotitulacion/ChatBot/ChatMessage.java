@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.ChatBot;
 
 public class ChatMessage {
     private final String messageText;

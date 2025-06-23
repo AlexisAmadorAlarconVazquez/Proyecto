@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.Registro;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.proyectotitulacion.Login.LoginActivity;
+import com.example.proyectotitulacion.R;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -97,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 // LOGIN EXITOSO
     private void registrarUsuario(String usuario, String nombre, String fecha, String genero, String email, String password) {
         String url = "" +
-                "http://192.168.1.103/WebService/registro.php";
+                "http://192.168.1.104/WebService/registro.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

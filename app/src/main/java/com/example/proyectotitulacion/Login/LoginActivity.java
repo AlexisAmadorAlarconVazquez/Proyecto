@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.Login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +15,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.proyectotitulacion.Mapa.HomeActivity;
+import com.example.proyectotitulacion.R;
+import com.example.proyectotitulacion.Registro.RegisterActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     Button loginButton;
     TextView registerLink;
-    private static final String LOGIN_URL = "http://192.168.1.103/WebService/login.php";
+    private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
     private static final String TAG = "LoginActivity";
     public static final String PREFS_APP_NAME = "MyLoginAppPrefs";
     public static final String KEY_LAST_USED_USERNAME = "lastUsername";

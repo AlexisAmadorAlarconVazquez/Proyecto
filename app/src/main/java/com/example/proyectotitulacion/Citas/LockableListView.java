@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.Citas;
 
 import android.content.Context;
 import android.util.AttributeSet;

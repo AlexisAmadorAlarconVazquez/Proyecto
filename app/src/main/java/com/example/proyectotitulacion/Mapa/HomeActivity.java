@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.Mapa;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.viewpager2.widget.ViewPager2;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import com.example.proyectotitulacion.ChatBot.ChatActivity;
+import com.example.proyectotitulacion.Citas.MainActivity;
+import com.example.proyectotitulacion.PerfilUsuario.PerfilActivity;
+import com.example.proyectotitulacion.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {

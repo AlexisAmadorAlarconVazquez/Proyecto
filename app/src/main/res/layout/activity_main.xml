@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="26dp"
     android:background="@drawable/background_pantallasgenerales"
-    tools:context=".MainActivity">
+    tools:context=".Citas.MainActivity">
 
     <TextView
         android:id="@+id/tvTitulo"
@@ -116,7 +116,7 @@
             android:backgroundTint="#24C6DC"
             android:layout_marginTop="10dp" />
 
-        <com.example.proyectotitulacion.LockableListView
+        <com.example.proyectotitulacion.Citas.LockableListView
             android:id="@+id/listaCitas"
             android:layout_width="match_parent"
             android:layout_height="300dp"

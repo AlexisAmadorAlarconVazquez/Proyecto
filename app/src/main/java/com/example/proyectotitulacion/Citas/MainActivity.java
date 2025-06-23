@@ -1,4 +1,4 @@
-package com.example.proyectotitulacion;
+package com.example.proyectotitulacion.Citas;
 
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectotitulacion.Mapa.HomeActivity;
+import com.example.proyectotitulacion.Login.LoginActivity;
+import com.example.proyectotitulacion.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
