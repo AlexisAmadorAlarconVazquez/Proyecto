@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logoyidam"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ProyectoTitulacion"
-        tools:targetApi="31">
+        android:roundIcon="@drawable/logoyidam"
 
-        <!-- Pantalla principal -->
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ProyectoTitulacion">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCCKWtqvnAT5EXxX7KhMoCRM_r_du-iPnw" />
+
         <activity
-            android:name=".MainActivity"
+            android:name=".Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,23 +32,23 @@
             </intent-filter>
         </activity>
 
-        <!-- Pantalla de Registro -->
         <activity
-            android:name=".RegisterActivity"
-            android:exported="true" />
+            android:name=".Registro.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerfilUsuario.PerfilActivity"
+            android:exported="false" />
 
-        <!-- Otras pantallas del primer archivo -->
         <activity
-            android:name=".PerfilActivity"
+            android:name=".Mapa.HomeActivity"
             android:exported="false" />
+
         <activity
-            android:name=".CategoriasActivity"
+            android:name=".ChatBot.ChatActivity"
             android:exported="false" />
+
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ChatActivity"
+            android:name=".Citas.MainActivity"
             android:exported="false" />
 
     </application>

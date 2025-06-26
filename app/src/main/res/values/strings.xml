@@ -1,18 +1,81 @@
 <resources>
-    <string name="app_name">ProyectoTitulacion</string>
+    <string name="app_name">Fisio App</string>
     <string name="rama_main_hint">Home Rama Main</string>
     <string name="logo_description">Logo</string>
-    <string name="username_hint">Usuario ACTUALIZACION</string>
-    <string name="password_hint">Contraseñal</string>
+    <string name="username_hint">Usuario</string>
+    <string name="password_hint">Contraseña</string>
     <string name="texto_registrate">Regístrate</string>
     <string name="login_button">Ingresar</string>
     <string name="register_prompt">No tienes una cuenta?</string>
     <string name="name_person_hint">Nombre Completo</string>
     <string name="date_hint">Fecha de Nacimiento</string>
+    <string name="example_date">DD/MM/AAAA</string>
     <string name="gender_hint">Género</string>
     <string name="mail_hint">E-mail</string>
     <string name="account_hint">¿Tienes una Cuenta?</string>
     <string name="login_hint">Inicia Sesion</string>
     <string name="confirm_password_hint">Confirmar Contraseña</string>
     <string name="text_complete_register_hint">Completa tu registro para acceder a todas las funciones de la aplicación</string>
+    <string name="cita_hint">Agendar cita</string>
+    <string name="man_hint">Masculino</string>
+    <string name="woman_hint">Femenino</string>
+    <string name="other_hint">Otro</string>
+    <string name="registro_hint">Registro</string>
+    <string name="fecha_formateada">%1$d/%2$d/%3$d</string>
+    <string name="chat_message_hint">Escribe un mensaje</string>
+    <string name="chat_send_button_text">Enviar</string>
+    <string name="user_profile_text">Perfil de Usuario</string>
+
+    <!--    <string name="edit_profile_text">Editar Perfil</string> &lt;!&ndash; Unificada, usa "editar_perfil" &ndash;&gt;-->
+    <string name="name_user_text">Nombre de usuario</string>
+    <string name="example_email">alexis_av@tesch.edu.mx</string>
+    <string name="close_session_text">Cerrar Sesión</string>
+    <string name="cancel_button_text">Cancelar</string>
+    <string name="save_button_text">Guardar</string>
+    <string name="delete_button_text">Eliminar</string>
+    <string name="editar_perfil">Editar Perfil</string>
+
+    <!-- String para el placeholder de tvNombre, que causaba el error si no existía -->
+    <string name="name_person_text">Nombre Apellido</string> <!-- Ajusta el valor según necesites -->
+
+
+    <!-- STRINGS PARA DIÁLOGOS Y TOASTS (EXISTENTES Y NUEVAS/REVISADAS) -->
+
+    <!-- Para Dialogo de Confirmación de Borrado de Perfil -->
+    <string name="confirm_delete_profile_title">Confirmar Borrado</string>
+    <string name="confirm_delete_profile_message">¿Estás seguro de que deseas borrar tu perfil? Esta acción no se puede deshacer.</string>
+    <string name="delete_button_confirm">Borrar</string>
+
+    <!-- Para Dialogo de Confirmación de Cerrar Sesión -->
+    <string name="confirm_logout_title">Cerrar Sesión</string>
+    <string name="confirm_logout_message">¿Estás seguro de que deseas cerrar sesión?</string>
+    <string name="logout_button_confirm">Sí, Cerrar Sesión</string>
+    <string name="logout_button_cancel">No</string>
+
+
+    <!-- Mensajes de Toast/Feedback -->
+    <string name="profile_updated_success">Perfil actualizado con éxito.</string>
+    <string name="profile_update_error">Error al actualizar el perfil.</string> <!-- Genérico, considera usar el prefijo de abajo -->
+    <string name="profile_deleted_success">Perfil borrado con éxito.</string>
+    <string name="profile_delete_error">Error al borrar el perfil.</string> <!-- Genérico, considera usar el prefijo de abajo -->
+    <string name="error_loading_profile">Error al cargar el perfil.</string>
+    <string name="error_network_connection">Error de conexión.</string>
+    <string name="error_json_parsing">Error al procesar los datos.</string>
+    <string name="logout_success_message">Has cerrado sesión.</string>
+    <string name="error_missing_user_identifier">Identificador de usuario no encontrado. Redirigiendo a Login.</string>
+    <string name="fill_all_fields_error">Por favor, completa todos los campos editables.</string>
+
+    <!-- Strings para mensajes de BottomNavigationView y placeholders -->
+    <string name="calendar_selected_toast">Citas (Calendario) seleccionado</string>
+    <string name="chat_selected_toast">Chat seleccionado</string>
+    <string name="not_available_placeholder">N/A</string> <!-- Placeholder para datos no disponibles -->
+
+    <string name="server_error_prefix">Error del servidor: </string>
+    <string name="profile_update_error_prefix">Error al guardar: </string>
+    <string name="error_processing_save_response">Error al procesar respuesta del guardado.</string>
+    <string name="error_network_connection_save">Error de conexión al guardar.</string>
+    <string name="profile_delete_error_prefix">Error al borrar: </string>
+    <string name="error_processing_delete_response">Error al procesar respuesta del borrado.</string>
+    <string name="error_network_connection_delete">Error de conexión al borrar perfil.</string>
+
 </resources>
