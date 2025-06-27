@@ -2,6 +2,7 @@ package com.example.proyectotitulacion.Mapa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View; // Import necesario para la vista
 import androidx.viewpager2.widget.ViewPager2;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,72 +34,89 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this); // Habilitar EdgeToEdge
         setContentView(R.layout.activity_home);
+
+        // --- INICIALIZACIÓN DE COMPONENTES DE LA UI ---
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mapsFragmentContainer, new MapsFragment())
                 .commit();
+
         viewPager = findViewById(R.id.imageSlider);
         ImageAdapter adapter = new ImageAdapter(images);
         viewPager.setAdapter(adapter);
 
-// Carrusel automático
+        // Carrusel automático
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                viewPager.post(() -> {
-                    currentPage = (currentPage + 1) % images.length;
-                    viewPager.setCurrentItem(currentPage, true);
-                });
+                // Asegurarse de que las actualizaciones de la UI se ejecuten en el hilo principal
+                if (viewPager != null) {
+                    viewPager.post(() -> {
+                        currentPage = (currentPage + 1) % images.length;
+                        viewPager.setCurrentItem(currentPage, true);
+                    });
+                }
             }
         }, 3000, 3000); // 3 segundos
 
+        // --- MANEJO DE WINDOW INSETS ---
+        // Obtener la referencia al contenedor del contenido principal
+        // ESTE ES EL CAMBIO IMPORTANTE: Usar R.id.main_content_container
+        View mainContentContainer = findViewById(R.id.main_content_container);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        if (mainContentContainer != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(mainContentContainer, (v, windowInsets) -> {
+                Insets systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                // Aplicar padding al contenedor del contenido para que no se solape con las barras del sistema
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                // Devolver los insets originales para que otros listeners (si los hubiera) puedan consumirlos.
+                return windowInsets;
+            });
+        } else {
+            // Considera loggear un error si main_content_container no se encuentra,
+            // aunque con el layout XML correcto, esto no debería suceder.
+            // Log.e("HomeActivity", "main_content_container no encontrado!");
+        }
 
 
-        });
-
+        // --- CONFIGURACIÓN DEL BOTTOMNAVIGATIONVIEW ---
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
-        nav.setSelectedItemId(R.id.nav_home);
+        nav.setSelectedItemId(R.id.nav_home); // Marcar el ítem home como seleccionado
 
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
+                // Ya estamos en Home, no hacer nada o recargar si es necesario
                 return true;
             } else if (id == R.id.nav_calendar) {
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
+                navigateTo(MainActivity.class);
                 return true;
-
             } else if (id == R.id.nav_chat) {
-                Intent intent = new Intent(this, ChatActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
+                navigateTo(ChatActivity.class);
                 return true;
             } else if (id == R.id.nav_profile) {
-                Intent intent = new Intent(this, PerfilActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
+                navigateTo(PerfilActivity.class);
                 return true;
             }
             return false;
         });
     }
-        @Override
-        protected void onDestroy() {
-            super.onDestroy();
-            if (timer != null) {
-                timer.cancel();
-            }
 
+    private void navigateTo(Class<?> activityClass) {
+        Intent intent = new Intent(this, activityClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish(); // Cierra la actividad actual
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+            timer = null; // Buena práctica para liberar recursos
+        }
     }
 }

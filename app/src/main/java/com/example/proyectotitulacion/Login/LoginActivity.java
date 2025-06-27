@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     Button loginButton;
     TextView registerLink;
-    private static final String LOGIN_URL = "http://192.168.1.104/WebService/login.php";
+    private static final String LOGIN_URL = "http://192.168.137.1/WebService/login.php";
     private static final String TAG = "LoginActivity";
     public static final String PREFS_APP_NAME = "MyLoginAppPrefs";
     public static final String KEY_LAST_USED_USERNAME = "lastUsername";

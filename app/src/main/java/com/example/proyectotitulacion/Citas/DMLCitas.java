@@ -53,7 +53,7 @@ public class DMLCitas {
     private void enviarReagendadaMySQL(Context context, int idCita, String fecha, String hora, String estado, String motivo) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.104/WebService/actualizar_cita.php");
+                URL url = new URL("http://192.168.137.1/WebService/actualizar_cita.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -93,7 +93,7 @@ public class DMLCitas {
     private void enviarCitaMySql(Context context, int idUsuario, String fecha, String hora) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.104/WebService/registrar_cita.php");
+                URL url = new URL("http://192.168.137.1/WebService/registrar_cita.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -143,7 +143,7 @@ public class DMLCitas {
     private void enviarCanceladaMySQL(Context context, int idCita, String motivo) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.104/WebService/cancelar_cita.php");
+                URL url = new URL("http://192.168.137.1/WebService/cancelar_cita.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);

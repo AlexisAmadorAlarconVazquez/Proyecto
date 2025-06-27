@@ -5,126 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="26dp"
     android:background="@drawable/background_pantallasgenerales"
     tools:context=".Citas.MainActivity">
-
-    <TextView
-        android:id="@+id/tvTitulo"
-        android:layout_width="251dp"
-        android:layout_height="wrap_content"
-        android:text="Agendar cta"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="23sp"
-        android:gravity="center"
-        android:padding="12dp"
-        android:background="@drawable/redondoblanco_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvFechaSeleccionada"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Seleccione la fecha para agendar su cita"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        android:paddingTop="40dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnSeleccionarFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seleccionar fecha"
-        app:layout_constraintTop_toBottomOf="@id/tvFechaSeleccionada"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#24C6DC"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/tvHorarioLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Seleccione el horario para agendar su cita"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        android:paddingTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/btnSeleccionarFecha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinnerHorario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHorarioLabel" />
-
-    <Button
-        android:id="@+id/btnEnviarCita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agendar cita"
-        app:layout_constraintTop_toBottomOf="@id/spinnerHorario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#24C6DC"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/tvResultadoCita"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:padding="12dp"
-        android:background="@drawable/redondoblanco_background"
-        app:layout_constraintTop_toBottomOf="@id/btnEnviarCita"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp" />
-
-    <LinearLayout
-        android:id="@+id/rootLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tvResultadoCita"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
-
-        <Button
-            android:id="@+id/btnConsultarCitas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consultar mis citas"
-            android:backgroundTint="#24C6DC"
-            android:layout_marginTop="10dp" />
-
-        <com.example.proyectotitulacion.Citas.LockableListView
-            android:id="@+id/listaCitas"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_weight="10"
-            android:background="@color/black"
-            android:divider="@android:color/white"
-            android:dividerHeight="1dp" />
-    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -138,5 +20,142 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Agendar Cita"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@drawable/redondoblanco_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/citas_content_scrollview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/citas_scrollable_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="26dp"
+            android:paddingEnd="26dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvFechaSeleccionada"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Seleccione la fecha para agendar su cita"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btnSeleccionarFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Seleccionar fecha"
+                android:backgroundTint="#24C6DC"
+                app:layout_constraintTop_toBottomOf="@id/tvFechaSeleccionada"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvHorarioLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Seleccione el horario para agendar su cita"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/btnSeleccionarFecha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerHorario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvHorarioLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497" />
+
+            <Button
+                android:id="@+id/btnEnviarCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Agendar cita"
+                android:backgroundTint="#24C6DC"
+                app:layout_constraintTop_toBottomOf="@id/spinnerHorario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvResultadoCita"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:padding="12dp"
+                android:background="@drawable/redondoblanco_background"
+                app:layout_constraintTop_toBottomOf="@id/btnEnviarCita"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/layoutListaCitas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvResultadoCita"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                    android:id="@+id/btnConsultarCitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Consultar mis citas"
+                    android:backgroundTint="#24C6DC"
+                    android:layout_marginTop="10dp" />
+
+                <com.example.proyectotitulacion.Citas.LockableListView
+                    android:id="@+id/listaCitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/black"
+                    android:divider="@android:color/white"
+                    android:dividerHeight="1dp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
