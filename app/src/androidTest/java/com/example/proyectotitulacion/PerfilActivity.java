@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectotitulacion.ChatBot.ChatActivity;
+import com.example.proyectotitulacion.Citas.MainActivity;
+import com.example.proyectotitulacion.Mapa.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PerfilActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class PerfilActivity extends AppCompatActivity {
             return insets;
         });
 
-        BottomNavigationView nav = findViewById(R.id.bottomNavigation);
+        BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.nav_profile);
 
         nav.setOnItemSelectedListener(item -> {
@@ -36,7 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                finishu();
+                finish();
                 return true;
             } else if (id == R.id.nav_home) {
                 Intent intent = new Intent(this, HomeActivity.class);
@@ -44,7 +46,7 @@ public class PerfilActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
-            } else if (id == R.id.nav_categories) {
+            } else if (id == R.id.nav_calendar) {
                 Intent intent = new Intent(this, CategoriasActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
