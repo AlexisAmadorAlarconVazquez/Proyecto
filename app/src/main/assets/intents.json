@@ -1,0 +1,72 @@
+[
+  {
+    "tag": "saludo",
+    "patterns": ["hola", "buenas", "qué tal", "hey", "holi"],
+    "synonyms": ["saludos", "buen día", "qué onda"],
+    "responses": [
+      "¡Hola! ¿Cómo estás?",
+      "¡Buenas! ¿Qué tal tu día?",
+      "¡Hey! Bienvenido 👋"
+    ],
+    "quickReplies": ["Bien", "Mal", "Regular"]
+  },
+  {
+    "tag": "despedida",
+    "patterns": ["adiós", "hasta luego", "me voy"],
+    "synonyms": ["nos vemos", "bye", "chao"],
+    "responses": [
+      "¡Hasta luego! 👋",
+      "Cuídate mucho, nos vemos pronto."
+    ]
+  },
+  {
+    "tag": "ayuda_general",
+    "patterns": ["necesito ayuda", "tengo dudas", "qué puedo hacer"],
+    "synonyms": ["ayúdame", "no entiendo", "explícame"],
+    "responses": [
+      "Claro 😊, puedo ayudarte con tu perfil, tus citas médicas o dudas de salud.",
+      "Dime, ¿quieres ayuda con tu perfil, tus citas o información de salud?"
+    ],
+    "quickReplies": ["Perfil", "Citas", "Salud"]
+  },
+  {
+    "tag": "perfil_info",
+    "patterns": ["mi perfil", "ver perfil", "editar perfil"],
+    "synonyms": ["configuración", "mis datos", "usuario"],
+    "responses": [
+      "Puedes acceder a tu perfil desde el menú inferior en la opción **Perfil** 👤.",
+      "En tu perfil podrás actualizar tu información personal, correo y contraseña."
+    ],
+    "quickReplies": ["Abrir Perfil", "Cambiar contraseña", "Actualizar datos"]
+  },
+  {
+    "tag": "citas_info",
+    "patterns": ["citas médicas", "consultas", "mis citas"],
+    "synonyms": ["agendar", "doctor", "turno médico"],
+    "responses": [
+      "En la sección **Citas** puedes agendar, consultar o cancelar tus citas médicas 🩺.",
+      "¿Quieres que te muestre cómo agendar una cita?"
+    ],
+    "quickReplies": ["Agendar cita", "Cancelar cita", "Ver próximas citas"]
+  },
+  {
+    "tag": "salud_info",
+    "patterns": ["información de salud", "consejos de salud", "estoy enfermo"],
+    "synonyms": ["síntomas", "me siento mal", "qué hago si estoy enfermo"],
+    "responses": [
+      "Recuerda mantenerte hidratado 💧, dormir bien 💤 y seguir tus medicamentos.",
+      "Si tienes síntomas graves, te recomiendo contactar a un médico inmediatamente."
+    ],
+    "quickReplies": ["Consejos rápidos", "Contactar doctor", "Primeros auxilios"]
+  },
+  {
+    "tag": "navegacion",
+    "patterns": ["menú", "navegar", "secciones", "opciones"],
+    "synonyms": ["dónde encuentro", "cómo voy a", "me pierdo en la app"],
+    "responses": [
+      "Desde el menú inferior puedes ir a: **Inicio 🏠, Citas 🩺, Perfil 👤 y Ayuda ❓**",
+      "El menú siempre está en la parte de abajo de la pantalla."
+    ],
+    "quickReplies": ["Ir a Inicio", "Abrir Citas", "Abrir Perfil"]
+  }
+]

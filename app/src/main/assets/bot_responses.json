@@ -1,0 +1,59 @@
+{
+  "como_estas": [
+    "Estoy funcionando perfectamente, ¡lista para ayudarte!",
+    "Muy bien, ¿y tú? ¿En qué te puedo asistir?"
+  ],
+  "ayuda": [
+    "Claro, dime qué necesitas relacionado con nuestros servicios de fisioterapia.",
+    "Estoy aquí para ayudarte. ¿Tienes alguna pregunta sobre citas, horarios o servicios?"
+  ],
+  "gracias": [
+    "¡De nada! Es un placer ayudarte.",
+    "Un placer. Si tienes más preguntas, no dudes en consultar.",
+    "No hay de qué. ¡Estoy para servirte!"
+  ],
+  "nombre": [
+    "Soy FisioBot, tu asistente virtual para la clínica.",
+    "Puedes llamarme Asistente Fisio."
+  ],
+
+
+  "horario": [
+    "Lunes a viernes de 8:00 AM a 2:00 PM. Nota: 1:00 PM no disponible para citas.",
+    "Atendemos de L-V, 8:00–14:00. La franja de 13:00 está reservada."
+  ],
+  "cita": [
+    "¿Quieres agendar, consultar disponibilidad o cancelar una cita?",
+    "Para citas: L-V de 8:00 a 14:00 (excepto 13:00). ¿Qué necesitas hacer?"
+  ],
+  "agendar": [
+    "Para agendar, dime un día tentativo o entra a la sección 'Citas' de la app.",
+    "Puedo ayudarte a elegir horario. Indica un día y te digo opciones."
+  ],
+  "cancelar_cita": [
+    "Puedes cancelar desde 'Mis Citas' o llamando al 5512925537."
+  ],
+
+
+  "servicios": [
+    "Terapia manual, rehabilitación post-operatoria, lesiones deportivas y electroterapia.",
+    "Principales servicios: fisioterapia deportiva, neurológica y rehabilitación."
+  ],
+  "dolor_espalda": [
+    "Tratamos dolor de espalda. Una evaluación inicial define el mejor enfoque.",
+    "Podemos valorar lumbalgia y dorsalgia. ¿Quieres agendar evaluación?"
+  ],
+  "rehabilitacion": [
+    "Programas para post-operatorios, lesiones deportivas o neurológicas. ¿Cuál te interesa?"
+  ],
+  "lesion": [
+    "Tratamos lesiones musculoesqueléticas. Describe brevemente tu lesión."
+  ],
+
+
+  "desconocido": [
+    "No entendí bien. Pregúntame sobre horarios, citas o servicios.",
+    "¿Puedes reformular? Temas: horarios, citas, tratamientos y servicios.",
+    "Hmm, eso es nuevo para mí. Intenta con horarios (L-V 8–14, sin 13:00) o servicios."
+  ]
+}

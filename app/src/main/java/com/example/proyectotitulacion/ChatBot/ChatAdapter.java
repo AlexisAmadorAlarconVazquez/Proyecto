@@ -3,50 +3,97 @@ package com.example.proyectotitulacion.ChatBot;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectotitulacion.R;
+
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<ChatMessage> messageList;
+    private static final int TYPE_USER = 0;
+    private static final int TYPE_BOT = 1;
+    private static final int TYPE_TYPING = 2;
 
-    // Constructor
-    public ChatAdapter(List<ChatMessage> messageList) {
-        this.messageList = messageList;
+    private final List<ChatMessage> messages;
+
+    public ChatAdapter(List<ChatMessage> messages, ChatActivity chatActivity) {
+        this.messages = messages;
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        ChatMessage m = messages.get(position);
+        if (m.isTyping()) return TYPE_TYPING;
+        return m.isUser() ? TYPE_USER : TYPE_BOT;
+    }
+
     @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
-        return new MessageViewHolder(view);
-    }
-    @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        ChatMessage message = messageList.get(position);
-        String displayText;
-
-        if (message.isUserMessage()) {
-            displayText = "Tú: " + message.getMessageText();
-
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inf = LayoutInflater.from(parent.getContext());
+        if (viewType == TYPE_USER) {
+            View v = inf.inflate(R.layout.item_message_user, parent, false);
+            return new UserVH(v);
+        } else if (viewType == TYPE_BOT) {
+            View v = inf.inflate(R.layout.item_message_bot, parent, false);
+            return new BotVH(v);
         } else {
-            displayText = "Bot: " + message.getMessageText();
+            View v = inf.inflate(R.layout.item_message_bot_typing, parent, false);
+            return new TypingVH(v);
         }
-        holder.messageTextView.setText(displayText);
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ChatMessage m = messages.get(position);
+        if (holder instanceof UserVH) {
+            ((UserVH) holder).txt.setText(m.getText());
+            animate(holder.itemView);
+        } else if (holder instanceof BotVH) {
+            ((BotVH) holder).txt.setText(m.getText());
+            animate(holder.itemView);
+        }
+    }
+
     @Override
     public int getItemCount() {
-        return messageList.size();
+        return messages.size();
     }
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
 
-        public MessageViewHolder(@NonNull View itemView) {
+    private void animate(View itemView) {
+        Animation anim = AnimationUtils.loadAnimation(itemView.getContext(), R.anim.item_fade_in);
+        itemView.startAnimation(anim);
+    }
+
+    public interface OnQuickReplyClickListener {
+        void onQuickReplyClick(String reply);
+    }
+
+    static class UserVH extends RecyclerView.ViewHolder {
+        TextView txt;
+        UserVH(@NonNull View itemView) {
             super(itemView);
-            messageTextView = itemView.findViewById(android.R.id.text1);
+            txt = itemView.findViewById(R.id.textMessageUser);
+        }
+    }
+
+    static class BotVH extends RecyclerView.ViewHolder {
+        TextView txt;
+        BotVH(@NonNull View itemView) {
+            super(itemView);
+            txt = itemView.findViewById(R.id.textMessageBot);
+        }
+    }
+
+    static class TypingVH extends RecyclerView.ViewHolder {
+        TypingVH(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

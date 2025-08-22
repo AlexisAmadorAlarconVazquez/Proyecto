@@ -1,16 +1,25 @@
 package com.example.proyectotitulacion.ChatBot;
 
+
 public class ChatMessage {
-    private final String messageText;
-    private final boolean isUserMessage;
-    public ChatMessage(String messageText, boolean isUserMessage) {
-        this.messageText = messageText;
-        this.isUserMessage = isUserMessage;
+    private final String text;
+    private final boolean isUser;
+    private final boolean isTyping; // para animación "escribiendo…"
+
+
+    public ChatMessage(String text, boolean isUser, boolean b, boolean b1) {
+        this(text, isUser, false);
     }
-    public String getMessageText() {
-        return messageText;
+
+
+    public ChatMessage(String text, boolean isUser, boolean isTyping) {
+        this.text = text;
+        this.isUser = isUser;
+        this.isTyping = isTyping;
     }
-    public boolean isUserMessage() {
-        return isUserMessage;
-    }
+
+
+    public String getText() { return text; }
+    public boolean isUser() { return isUser; }
+    public boolean isTyping() { return isTyping; }
 }

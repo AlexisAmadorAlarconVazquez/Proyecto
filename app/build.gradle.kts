@@ -29,10 +29,9 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-}
 
 dependencies {
     implementation(libs.appcompat)
@@ -44,9 +43,12 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
-
-    // Volley agregado correctamente
     implementation(libs.volley)
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
 
-}
+    // Dependencias externas directas
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    // Ya no hace falta material otra vez si usas libs.material
+
+}}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="bg_user_message" />
+    <drawable name="bg_bot_message" />
+</resources>
