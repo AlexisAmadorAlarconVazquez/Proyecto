@@ -1,4 +1,14 @@
 {
+  "hola": [
+    "¡Hola! Soy tu asistente virtual de fisioterapia. ¿En qué puedo ayudarte hoy?",
+    "¡Qué tal! Listo para ayudarte con tus consultas de fisioterapia.",
+    "Hola, ¿cómo te puedo asistir hoy?"
+  ],
+  "adios": [
+    "¡Hasta luego! Espero haberte ayudado.",
+    "Adiós, ¡que tengas un excelente día y pronta recuperación!",
+    "Nos vemos. ¡Cuídate!"
+  ],
   "como_estas": [
     "Estoy funcionando perfectamente, ¡lista para ayudarte!",
     "Muy bien, ¿y tú? ¿En qué te puedo asistir?"
@@ -17,7 +27,6 @@
     "Puedes llamarme Asistente Fisio."
   ],
 
-
   "horario": [
     "Lunes a viernes de 8:00 AM a 2:00 PM. Nota: 1:00 PM no disponible para citas.",
     "Atendemos de L-V, 8:00–14:00. La franja de 13:00 está reservada."
@@ -34,7 +43,6 @@
     "Puedes cancelar desde 'Mis Citas' o llamando al 5512925537."
   ],
 
-
   "servicios": [
     "Terapia manual, rehabilitación post-operatoria, lesiones deportivas y electroterapia.",
     "Principales servicios: fisioterapia deportiva, neurológica y rehabilitación."
@@ -49,7 +57,6 @@
   "lesion": [
     "Tratamos lesiones musculoesqueléticas. Describe brevemente tu lesión."
   ],
-
 
   "desconocido": [
     "No entendí bien. Pregúntame sobre horarios, citas o servicios.",

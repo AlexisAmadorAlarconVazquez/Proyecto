@@ -7,7 +7,7 @@ public class ChatMessage {
     private final boolean isTyping; // para animación "escribiendo…"
 
 
-    public ChatMessage(String text, boolean isUser, boolean b, boolean b1) {
+    public ChatMessage(String text, boolean isUser) {
         this(text, isUser, false);
     }
 

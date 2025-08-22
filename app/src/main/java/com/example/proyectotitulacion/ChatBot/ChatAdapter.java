@@ -22,7 +22,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<ChatMessage> messages;
 
-    public ChatAdapter(List<ChatMessage> messages, ChatActivity chatActivity) {
+    public ChatAdapter(List<ChatMessage> messages) {
+        this.messages = messages;
+    }
+
+    public ChatAdapter(List<ChatMessage> messageList, List<ChatMessage> messages) {
         this.messages = messages;
     }
 

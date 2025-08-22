@@ -30,7 +30,7 @@ public class QuickReplyAdapter extends RecyclerView.Adapter<QuickReplyAdapter.VH
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_quick_reply, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_carrousel, parent, false);
         return new VH(v);
     }
 
@@ -51,7 +51,7 @@ public class QuickReplyAdapter extends RecyclerView.Adapter<QuickReplyAdapter.VH
         TextView txt;
         VH(@NonNull View itemView) {
             super(itemView);
-            txt = itemView.findViewById(R.id.textQuickReply);
+            txt = itemView.findViewById(R.id.textMessageBot);
         }
     }
 }
