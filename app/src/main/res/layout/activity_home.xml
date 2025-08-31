@@ -34,7 +34,8 @@
 
             <TextView
                 android:id="@+id/tituloHome"
-                android:text="HOME"
+                android:text="Bienvenido a FISIO APP "
+                android:layout_gravity="center"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
