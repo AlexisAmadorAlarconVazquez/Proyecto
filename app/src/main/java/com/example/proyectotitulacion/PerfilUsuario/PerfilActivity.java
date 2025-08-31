@@ -108,8 +108,17 @@ public class PerfilActivity extends AppCompatActivity {
             } else if (itemId == R.id.nav_chat) {
                 Toast.makeText(PerfilActivity.this, getString(R.string.chat_selected_toast), Toast.LENGTH_SHORT).show();
                 return true;
-            } else return itemId == R.id.nav_profile;
+            } else if (itemId == R.id.nav_categories) {
+                startActivity(new Intent(getApplicationContext(), com.example.proyectotitulacion.Clasificacion.CategoriasActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                return true;
+            }
+            return false;
         });
+
 
         SharedPreferences prefs = getSharedPreferences(LoginActivity.PREFS_APP_NAME, MODE_PRIVATE);
         currentUserIdentifier = prefs.getString(LoginActivity.KEY_CURRENT_USER_IDENTIFIER, null);

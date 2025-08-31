@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Por favor, selecciona una fecha válida.", Toast.LENGTH_SHORT).show();
         }
     }
-
+//MENU
     private void configurarBottomNavigation() {
         if (bottomNavigationView != null) {
             bottomNavigationView.setSelectedItemId(R.id.nav_calendar);
@@ -189,9 +189,12 @@ public class MainActivity extends AppCompatActivity {
                     navigateTo(HomeActivity.class);
                     return true;
                 } else if (itemId == R.id.nav_calendar) {
-                    return true; // Ya estamos aquí
+                    return true;
                 } else if (itemId == R.id.nav_chat) {
                     navigateTo(ChatActivity.class);
+                    return true;
+                } else if (itemId == R.id.nav_categories) {
+                    navigateTo(com.example.proyectotitulacion.Clasificacion.CategoriasActivity.class);
                     return true;
                 } else if (itemId == R.id.nav_profile) {
                     navigateTo(PerfilActivity.class);
@@ -201,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
 
     private void navigateTo(Class<?> activityClass) {
         if (!this.getClass().equals(activityClass)) {

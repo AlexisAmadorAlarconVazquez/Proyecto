@@ -53,6 +53,14 @@
             android:name=".Citas.MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".Clasificacion.CategoriasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Clasificacion.GifViewerActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
