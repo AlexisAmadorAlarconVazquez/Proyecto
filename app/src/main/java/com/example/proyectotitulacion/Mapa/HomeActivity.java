@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-        // --- CONFIGURACIÓN DEL BOTTOMNAVIGATIONVIEW ---
+// --- CONFIGURACIÓN DEL BOTTOMNAVIGATIONVIEW ---
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.nav_home); // Marcar el ítem home como seleccionado
 
@@ -96,6 +96,9 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.nav_chat) {
                 navigateTo(ChatActivity.class);
                 return true;
+            } else if (id == R.id.nav_categories) {
+                navigateTo(com.example.proyectotitulacion.Clasificacion.CategoriasActivity.class);
+                return true;
             } else if (id == R.id.nav_profile) {
                 navigateTo(PerfilActivity.class);
                 return true;
@@ -103,6 +106,8 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
     }
+
+
 
     private void navigateTo(Class<?> activityClass) {
         Intent intent = new Intent(this, activityClass);

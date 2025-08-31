@@ -90,10 +90,13 @@ public class ChatActivity extends AppCompatActivity {
                 if (id == R.id.nav_chat) {
                     return true;
                 } else if (id == R.id.nav_calendar) {
-                    startNewActivity(MainActivity.class);
+                    startNewActivity(MainActivity.class); // Asumiendo que MainActivity es tu actividad de calendario/citas
                     return true;
                 } else if (id == R.id.nav_home) {
                     startNewActivity(HomeActivity.class);
+                    return true;
+                } else if (id == R.id.nav_categories) {
+                    startNewActivity(com.example.proyectotitulacion.Clasificacion.CategoriasActivity.class);
                     return true;
                 } else if (id == R.id.nav_profile) {
                     startNewActivity(PerfilActivity.class);

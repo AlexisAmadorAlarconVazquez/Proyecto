@@ -24,12 +24,9 @@
             android:value="AIzaSyCCKWtqvnAT5EXxX7KhMoCRM_r_du-iPnw" />
 
         <activity
-            android:name=".Login.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".Mapa.HomeActivity"
+            android:exported="false">
+            <!-- El intent-filter de LAUNCHER se ha movido a LoginActivity -->
         </activity>
 
         <activity
@@ -40,8 +37,13 @@
             android:exported="false" />
 
         <activity
-            android:name=".Mapa.HomeActivity"
-            android:exported="false" />
+            android:name=".Login.LoginActivity"
+            android:exported="true">  <!-- Exported es true porque es el nuevo LAUNCHER -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ChatBot.ChatActivity"
@@ -49,6 +51,14 @@
 
         <activity
             android:name=".Citas.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Clasificacion.CategoriasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Clasificacion.GifViewerActivity"
             android:exported="false" />
 
     </application>
